@@ -44,6 +44,18 @@
         opacity: 0;
         color: white;
         transition: transform opacity 500ms ease-in-out;
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 400;
+            text-shadow: 1px 2px black;
+            // width: 100%;
+        }
+
+        p {
+            font-size: 2rem;
+            text-shadow: 1px 2px black;
+        }
     }
 
     .show {
