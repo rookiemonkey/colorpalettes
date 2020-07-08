@@ -23,10 +23,14 @@
         z-index: 10;
         animation-name: fadeout;
         animation-delay: 1000ms;
-        animation-duration: 1500ms;
+        animation-duration: 2000ms;
+        // duration should the same with handle click
+        // color box setTimeout
     }
 
     .ColorBox-overlay-message {
+        display: flex;
+        flex-direction: column;
         position: fixed;
         left: 0;
         right: 0;
@@ -45,8 +49,10 @@
     .show {
         z-index: 25;
         animation-name: copied-msg-entrance;
-        animation-delay: 450ms;
-        animation-duration: 1500ms;
+        animation-delay: 150ms;
+        animation-duration: 2000ms;
+        // duration should the same with handle click
+        // color box setTimeout
     }
 
 
