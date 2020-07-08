@@ -13,7 +13,7 @@
         width: 100%;
         opacity: 0;
         z-index: 0;
-        transition: transform 1000ms ease-in-out;
+        transition: transform 500ms ease-in-out;
     }
 
     .ColorBox-copied {
@@ -23,8 +23,32 @@
         z-index: 10;
         animation-name: fadeout;
         animation-delay: 1000ms;
-        animation-duration: 3000ms;
+        animation-duration: 1500ms;
     }
+
+    .ColorBox-overlay-message {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        transform: scale(0.1);
+        opacity: 0;
+        color: white;
+        transition: transform opacity 500ms ease-in-out;
+    }
+
+    .show {
+        z-index: 25;
+        animation-name: copied-msg-entrance;
+        animation-delay: 450ms;
+        animation-duration: 500ms;
+    }
+
 
     .ColorBox-copy-container {
         .ColorBox-copy {
@@ -65,7 +89,6 @@
         background-color: rgba(255, 255, 255, 0.3);
         position: absolute;
         border: none;
-
         right: 0px;
         bottom: 0px;
         color: white;
@@ -82,8 +105,22 @@
     transition: 500ms;
 }
 
-
 @keyframes fadeout {
     0% {opacity: 1;}
     100% {opacity: 0;}
+}
+
+@keyframes copied-msg-entrance {
+    0% { 
+        opacity: 0;
+        transform: scale(0.1); 
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1); 
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1); 
+    }
 }

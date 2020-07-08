@@ -9,7 +9,7 @@ class ColorBox extends Component {
 
     handleCopy = () => {
         this.setState({ copied: true }, () => {
-            setTimeout(() => { this.setState({ copied: false }) }, 3000)
+            setTimeout(() => { this.setState({ copied: false }) }, 1500)
         })
     }
 
@@ -26,6 +26,11 @@ class ColorBox extends Component {
                     className={copied ? 'ColorBox-overlay ColorBox-copied' : 'ColorBox-overlay'}
                     style={s}
                 ></div>
+
+                <div className={copied ? 'ColorBox-overlay-message show' : 'ColorBox-overlay-message'}>
+                    <h1>COPIED!</h1>
+                    <p>{background}</p>
+                </div>
 
                 <div className="ColorBox-copy-container">
                     <div className="ColorBox-content-container">
