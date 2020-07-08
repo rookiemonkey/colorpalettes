@@ -7,6 +7,7 @@
     position: relative;
     cursor: pointer;
 
+    // overlay - background that grows when copied
     .ColorBox-overlay {
         transform: scale(0.1);
         height: 100%;
@@ -28,6 +29,7 @@
         // color box setTimeout
     }
 
+    // overlay - message that shows when copied
     .ColorBox-overlay-message {
         display: flex;
         flex-direction: column;
@@ -49,11 +51,10 @@
             font-size: 4rem;
             font-weight: 400;
             text-shadow: 1px 2px black;
-            // width: 100%;
         }
 
         p {
-            font-size: 2rem;
+            font-size: rem;
             text-shadow: 1px 2px black;
         }
     }
@@ -67,7 +68,7 @@
         // color box setTimeout
     }
 
-
+    // contains hides/shows the copy button
     .ColorBox-copy-container {
         .ColorBox-copy {
             width: 100px;
@@ -91,6 +92,7 @@
         }
     }
 
+    // contains the color name
     .ColorBox-content-container {
         position: absolute;
         width: 100%;
@@ -103,6 +105,7 @@
         font-size: 12px;
     }
 
+    // more button
     .ColorBox-more {
         background-color: rgba(255, 255, 255, 0.3);
         position: absolute;
@@ -115,6 +118,7 @@
         text-align: center;
         line-height: 30px;
         text-transform: uppercase;
+        cursor: zoom-in;
     }
 }
 
