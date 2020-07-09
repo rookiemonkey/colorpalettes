@@ -1,0 +1,16 @@
+.Footer-container { 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 4vh;
+
+    span {
+        margin-right: 1rem;
+        background-color: transparent;
+        transition: letter-spacing 500ms ease-in-out;
+
+        &:hover {
+            letter-spacing: 0.25rem;
+        }
+    }
+}

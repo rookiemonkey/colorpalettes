@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
+import Footer from './Footer';
 import shortid from 'shortid';
 import NavBar from './NavBar';
 import ColorBox from './ColorBox';
@@ -22,8 +23,9 @@ class Palette extends Component {
 
     render() {
 
-        const { level, format, changedFormat } = this.state
-        const b = this.props.palette.colors[level].map(c => {
+        const { paletteName, emoji, colors } = this.props.palette;
+        const { level, format, changedFormat } = this.state;
+        const b = colors[level].map(c => {
             return (
                 <ColorBox
                     key={shortid.generate()}
@@ -57,6 +59,11 @@ class Palette extends Component {
                     ContentProps={{
                         'aria-describedby': 'message-id'
                     }}
+                />
+
+                <Footer
+                    paletteName={paletteName}
+                    emoji={emoji}
                 />
 
             </div>
