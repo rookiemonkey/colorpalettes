@@ -5,6 +5,11 @@ import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
 
 class App extends Component {
+
+  getPalette = id => {
+    return seeds.find(p => { return p.id === id })
+  }
+
   render() {
     return (
       <Switch>
@@ -16,7 +21,12 @@ class App extends Component {
 
         <Route
           exact path='/palette/:id'
-          render={() => (<Palette palette={generatePalette(seeds[2])} />)}
+          render={props => {
+            const id = props.match.params.id;
+            const colors = this.getPalette(id)
+            const palette = generatePalette(colors)
+            return <Palette palette={palette} />
+          }}
         />
 
       </Switch>
