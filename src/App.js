@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import Palette from './components/Palette';
 import seeds from './components/seeds';
@@ -26,6 +26,7 @@ class App extends Component {
         <Route
           exact path='/palette/:id'
           render={props => {
+            if (!this.props.palette) { return (<Redirect to="/" />) }
             const id = props.match.params.id;
             const colors = this.getPalette(id)
             const palette = generatePalette(colors)

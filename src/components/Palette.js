@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Snackbar from '@material-ui/core/Snackbar';
 import Footer from './Footer';
 import shortid from 'shortid';
@@ -23,6 +24,7 @@ class Palette extends Component {
 
     render() {
 
+        if (!this.props.palette) { return (<Redirect to="/" />) }
         const { paletteName, emoji, colors } = this.props.palette;
         const { level, format, changedFormat } = this.state;
         const b = colors[level].map(c => {
