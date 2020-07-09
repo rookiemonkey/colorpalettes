@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import Home from './components/Home';
 import Palette from './components/Palette';
 import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
@@ -15,8 +16,11 @@ class App extends Component {
       <Switch>
 
         <Route
-          exact path='/'
-          render={() => (<h1>This is Home</h1>)}
+          exact
+          path='/'
+          render={() => {
+            return < Home palettes={seeds} />
+          }}
         />
 
         <Route
