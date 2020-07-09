@@ -26,8 +26,8 @@ class App extends Component {
         <Route
           exact path='/palette/:id'
           render={props => {
-            if (!this.props.palette) { return (<Redirect to="/" />) }
             const id = props.match.params.id;
+            if (!this.getPalette(id)) { return (<Redirect to="/" />) }
             const colors = this.getPalette(id)
             const palette = generatePalette(colors)
             return <Palette palette={palette} />
