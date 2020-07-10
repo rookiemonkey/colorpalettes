@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import Snackbar from '@material-ui/core/Snackbar';
 import shortid from 'shortid';
 import NavBar from './NavBar';
 import Footer from './Footer';
@@ -38,6 +39,7 @@ class PaletteSingle extends Component {
         })
     }
 
+
     render() {
 
         if (!this.props.palette) { return (<Redirect to="/" />) }
@@ -64,6 +66,19 @@ class PaletteSingle extends Component {
                 <div className="Palette-colors">
                     {b}
                 </div>
+
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.changedFormat}
+                    autoHideDuration={3000}
+                    message={<span id="message-id">Color format changed to {this.state.format}</span>}
+                    ContentProps={{
+                        'aria-describedby': 'message-id'
+                    }}
+                />
 
                 <Footer
                     paletteName={paletteName}
