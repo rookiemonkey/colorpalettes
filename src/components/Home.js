@@ -35,12 +35,21 @@ const style = {
 }
 
 class Home extends Component {
+
+    handleClick = id => {
+        this.props.history.push(`/palette/${id}`)
+    }
+
     render() {
 
         const { palettes, classes } = this.props
         const minipalettes = palettes.map((p, i) => {
             return (
-                <MiniPalette {...palettes[i]} key={shortid.generate()} />
+                <MiniPalette
+                    {...palettes[i]}
+                    key={shortid.generate()}
+                    handleClick={this.handleClick}
+                />
             )
         })
 

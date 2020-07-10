@@ -18,8 +18,8 @@ class App extends Component {
         <Route
           exact
           path='/'
-          render={() => {
-            return < Home palettes={seeds} />
+          render={(routerProps) => {
+            return < Home palettes={seeds} {...routerProps} />
           }}
         />
 
