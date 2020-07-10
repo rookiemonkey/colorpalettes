@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import shortid from 'shortid';
+import NavBar from './NavBar';
 import Footer from './Footer';
 import ColorBoxSingle from './ColorBoxSingle';
 
 class PaletteSingle extends Component {
     constructor(props) {
         super(props)
+        this.state = { format: 'hex', changedFormat: false }
         this._shades = this.getShades(this.props.palette, this.props.colorId)
     }
 
@@ -29,6 +31,14 @@ class PaletteSingle extends Component {
         return shades
     }
 
+    changeFormat = format => {
+        this.setState({ ...this.state, format: format, changedFormat: true }, () => {
+            setTimeout(() => {
+                this.setState({ ...this.state, changedFormat: false })
+            }, 3000)
+        })
+    }
+
     render() {
 
         if (!this.props.palette) { return (<Redirect to="/" />) }
@@ -37,7 +47,7 @@ class PaletteSingle extends Component {
             return (
                 <ColorBoxSingle
                     key={shortid.generate()}
-                    background={c.hex}
+                    background={c[this.state.format]}
                     colorName={c.name}
                 />
             )
@@ -45,6 +55,12 @@ class PaletteSingle extends Component {
 
         return (
             <div className='Palette'>
+
+                <NavBar
+                    changeFormat={this.changeFormat}
+                    changeLevel={() => { }}
+                    level=''
+                />
 
                 <div className="Palette-colors">
                     {b}
