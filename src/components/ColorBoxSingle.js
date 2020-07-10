@@ -46,10 +46,6 @@ class ColorBoxSingle extends Component {
                     </CopyToClipboard>
                 </div>
 
-                <Link to={`/palette/${parentId}/${singleColorId}`}>
-                    <span className='ColorBox-more'>MORE</span>
-                </Link>
-
             </div>
         )
     }
