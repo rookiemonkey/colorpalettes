@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
 import 'rc-slider/assets/index.css';
@@ -33,23 +33,27 @@ class NavBar extends Component {
                     <Link to='/'>React Color Picker</Link>
                 </div>
 
-                <div className="Navbar-slider-container">
+                {
+                    this.props.match.path !== "/palette/:id/:colorid"
+                        ? <div className="Navbar-slider-container">
 
-                    <span className="Navbar-level">
-                        Level: {level}
-                    </span>
+                            <span className="Navbar-level">
+                                Level: {level}
+                            </span>
 
-                    <div className="Navbar-slider">
-                        <Slider
-                            defaultValue={level}
-                            min={100}
-                            max={900}
-                            step={100}
-                            onAfterChange={this.handleChange}
-                        />
-                    </div>
+                            <div className="Navbar-slider">
+                                <Slider
+                                    defaultValue={level}
+                                    min={100}
+                                    max={900}
+                                    step={100}
+                                    onAfterChange={this.handleChange}
+                                />
+                            </div>
 
-                </div>
+                        </div>
+                        : null
+                }
 
                 <div className="Select-container">
                     <Select value={format} onChange={this.handleChangeFormat}>
@@ -64,4 +68,4 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

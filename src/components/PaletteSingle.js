@@ -17,7 +17,6 @@ class PaletteSingle extends Component {
         let allColors = palette.colors;
         for (let level in allColors) {
             allColors[level].forEach(c => {
-                console.log(c)
                 if (c.id == colorId) {
                     shades.push({
                         name: c.name,
