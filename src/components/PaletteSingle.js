@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import shortid from 'shortid';
+import Footer from './Footer';
+import ColorBoxSingle from './ColorBoxSingle';
 
 class PaletteSingle extends Component {
     constructor(props) {
@@ -7,17 +11,17 @@ class PaletteSingle extends Component {
     }
 
     getShades = (palette, colorId) => {
-        let shades = {}
+        let shades = []
         let allColors = palette.colors;
         for (let level in allColors) {
             allColors[level].forEach(c => {
                 if (c.id == colorId) {
-                    shades[level] = {
+                    shades.push({
                         level: level,
                         hex: c.hex,
                         rgb: c.rgb,
                         rgba: c.rgba
-                    }
+                    })
                 }
             })
         }
@@ -26,8 +30,31 @@ class PaletteSingle extends Component {
 
     render() {
 
+        if (!this.props.palette) { return (<Redirect to="/" />) }
+        const { paletteName, emoji, colors, id } = this.props.palette;
+        const b = this._shades.map(c => {
+            return (
+                <ColorBoxSingle
+                    key={shortid.generate()}
+                    background={c.hex}
+                    colorName={c.name}
+                />
+            )
+        })
+
         return (
-            <h1>Color Box Single</h1>
+            <div className='Palette'>
+
+                <div className="Palette-colors">
+                    {b}
+                </div>
+
+                <Footer
+                    paletteName={paletteName}
+                    emoji={emoji}
+                />
+
+            </div>
         )
     }
 }
