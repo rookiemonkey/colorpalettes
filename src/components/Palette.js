@@ -25,11 +25,14 @@ class Palette extends Component {
     render() {
 
         if (!this.props.palette) { return (<Redirect to="/" />) }
-        const { paletteName, emoji, colors } = this.props.palette;
+        console.log('pleteee', this.props.palette)
+        const { paletteName, emoji, colors, id } = this.props.palette;
         const { level, format, changedFormat } = this.state;
         const b = colors[level].map(c => {
             return (
                 <ColorBox
+                    parentId={id}
+                    singleColorId={c.id}
                     key={shortid.generate()}
                     background={c[format]}
                     colorName={c.name}

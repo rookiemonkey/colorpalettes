@@ -34,6 +34,15 @@ class App extends Component {
           }}
         />
 
+        <Route
+          exact path='/palette/:id/:colorname'
+          render={props => {
+            const id = props.match.params.id;
+            const colorname = props.match.params.colorname;
+            return <h1>{colorname}</h1>
+          }}
+        />
+
       </Switch>
     );
   }
