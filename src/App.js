@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import Palette from './components/Palette';
+import PaletteSingle from './components/PaletteSingle';
 import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
 
@@ -35,11 +36,14 @@ class App extends Component {
         />
 
         <Route
-          exact path='/palette/:id/:colorname'
+          exact path='/palette/:id/:colorid'
           render={props => {
             const id = props.match.params.id;
-            const colorname = props.match.params.colorname;
-            return <h1>{colorname}</h1>
+            if (!this.getPalette(id)) { return (<Redirect to="/" />) }
+            const colorid = props.match.params.colorid;
+            const colors = this.getPalette(id)
+            const palette = generatePalette(colors)
+            return <PaletteSingle palette={palette} colorId={colorid} />
           }}
         />
 
