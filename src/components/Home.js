@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
-import MiniPalette from './MiniPalette';
 import shortid from 'shortid';
+import MiniPalette from './MiniPalette';
 
 const style = {
     root: {
         backgroundColor: 'blue',
-        height: '100%',
+        height: '100vh',
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center'
@@ -40,7 +40,7 @@ class Home extends Component {
         const { palettes, classes } = this.props
         const minipalettes = palettes.map((p, i) => {
             return (
-                <MiniPalette {...palettes[i]} />
+                <MiniPalette {...palettes[i]} key={shortid.generate()} />
             )
         })
 
