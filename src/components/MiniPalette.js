@@ -34,7 +34,6 @@ const style = {
 
 const MiniPalette = props => {
     const { classes, paletteName, id, emoji, colors } = props
-    console.log(props)
 
     return (
         <section className={classes.root}>
