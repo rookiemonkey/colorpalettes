@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import MiniPalette from './MiniPalette';
 import shortid from 'shortid';
 
 class Home extends Component {
     render() {
 
         const { palettes } = this.props
-        const minipalettes = palettes.map(p => {
+        const minipalettes = palettes.map((p, i) => {
             return (
-                <section key={shortid.generate()}>
-                    <Link to={`/palette/${p.id}`}>{p.paletteName}</Link>
-                </section>
+                <MiniPalette {...palettes[i]} />
             )
         })
 
