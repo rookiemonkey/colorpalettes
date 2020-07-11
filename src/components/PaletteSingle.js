@@ -45,6 +45,7 @@ class PaletteSingle extends Component {
         if (!this.props.palette) { return (<Redirect to="/" />) }
         const { paletteName, emoji, colors, id } = this.props.palette;
         const b = this._shades.map(c => {
+            if (c.hex === '#ffffff') return null
             return (
                 <ColorBoxSingle
                     key={shortid.generate()}
