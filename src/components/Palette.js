@@ -29,7 +29,7 @@ class Palette extends Component {
         const { level, format, changedFormat } = this.state;
         const b = colors[level].map(c => {
             return (
-                <ColorBox
+                <ColorBox   
                     parentId={id}
                     singleColorId={c.id}
                     key={shortid.generate()}
