@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 class ColorBoxSingle extends Component {
@@ -17,7 +16,7 @@ class ColorBoxSingle extends Component {
     render() {
 
         const { copied } = this.state;
-        const { background, colorName, parentId, singleColorId } = this.props;
+        const { background, colorName } = this.props;
         const s = { background }
 
         return (

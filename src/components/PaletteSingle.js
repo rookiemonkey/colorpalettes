@@ -19,7 +19,7 @@ class PaletteSingle extends Component {
         let allColors = palette.colors;
         for (let level in allColors) {
             allColors[level].forEach(c => {
-                if (c.id == colorId) {
+                if (c.id === colorId) {
                     shades.push({
                         name: c.name,
                         hex: c.hex,
@@ -46,7 +46,7 @@ class PaletteSingle extends Component {
 
         console.log(this.props)
         if (!this.props.palette) { return (<Redirect to="/" />) }
-        const { paletteName, emoji, colors, id } = this.props.palette;
+        const { paletteName, emoji } = this.props.palette;
         const b = this._shades.map(c => {
             if (c.hex === '#ffffff') return null
             return (
