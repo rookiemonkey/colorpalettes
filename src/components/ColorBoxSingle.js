@@ -21,7 +21,7 @@ class ColorBoxSingle extends Component {
         const s = { background }
 
         return (
-            <div className="ColorBox-container" style={s}>
+            <div className="ColorBox-container" style={s} id="ColorBox-single">
 
                 <div
                     className={copied ? 'ColorBox-overlay ColorBox-copied' : 'ColorBox-overlay'}
@@ -34,7 +34,7 @@ class ColorBoxSingle extends Component {
                     <p>{background}</p>
                 </div>
 
-                <div className="ColorBox-copy-container">
+                <div className="ColorBox-copy-container" >
                     <div className="ColorBox-content-container">
                         <span className='ColorBox-name'>{colorName}</span>
                     </div>
