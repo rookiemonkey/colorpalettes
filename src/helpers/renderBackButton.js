@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const renderBackButton = props => {
 
     return (
-        <div className="ColorBox-container back-button-container">
+        <div className="ColorBox-container back-button-container" id="ColorBox-single">
 
             <div
                 className='ColorBox-overlay'
