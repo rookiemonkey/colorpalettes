@@ -5,6 +5,7 @@ import shortid from 'shortid';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import ColorBoxSingle from './ColorBoxSingle';
+import renderBackButton from '../helpers/renderBackButton';
 
 class PaletteSingle extends Component {
     constructor(props) {
@@ -39,9 +40,11 @@ class PaletteSingle extends Component {
         })
     }
 
+    goBack = () => { this.props.history.goBack() }
 
     render() {
 
+        console.log(this.props)
         if (!this.props.palette) { return (<Redirect to="/" />) }
         const { paletteName, emoji, colors, id } = this.props.palette;
         const b = this._shades.map(c => {
@@ -66,6 +69,7 @@ class PaletteSingle extends Component {
 
                 <div className="Palette-colors">
                     {b}
+                    {renderBackButton({ goBack: this.goBack })}
                 </div>
 
                 <Snackbar

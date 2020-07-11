@@ -43,7 +43,7 @@ class App extends Component {
             const colorid = props.match.params.colorid;
             const colors = this.getPalette(id)
             const palette = generatePalette(colors)
-            return <PaletteSingle palette={palette} colorId={colorid} />
+            return <PaletteSingle palette={palette} colorId={colorid} {...props} />
           }}
         />
 
