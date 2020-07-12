@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import Slider from 'rc-slider';
 import Select from '@material-ui/core/Select';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { MenuItem } from '@material-ui/core';
 
@@ -27,7 +27,7 @@ class NavBar extends Component {
         const { format } = this.state;
 
         return (
-            <header className="Navbar-container">
+            <nav className="Navbar-container">
 
                 <div className="Navbar-logo-container">
                     <Link to='/'>React Color Picker</Link>
@@ -63,7 +63,7 @@ class NavBar extends Component {
                     </Select>
                 </div>
 
-            </header>
+            </nav>
         )
     }
 }
