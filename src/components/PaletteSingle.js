@@ -44,7 +44,6 @@ class PaletteSingle extends Component {
 
     render() {
 
-        console.log(this.props)
         if (!this.props.palette) { return (<Redirect to="/" />) }
         const { paletteName, emoji } = this.props.palette;
         const b = this._shades.map(c => {
