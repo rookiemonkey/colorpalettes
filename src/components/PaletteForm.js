@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color'
+import shortid from 'shortid';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -37,7 +38,7 @@ class PaletteForm extends Component {
         this.setState({ ...this.state, currentColor: newColor.hex })
     }
 
-    handleAddColor = newColor => {
+    handleAddColor = () => {
         const { currentColor, colorBoxes } = this.state
         const newSet = [...colorBoxes, currentColor]
         this.setState({ ...this.state, colorBoxes: newSet, currentColor: 'white' })
@@ -45,8 +46,18 @@ class PaletteForm extends Component {
 
     render() {
         const { classes } = this.props
-        const { open, currentColor } = this.state
-        console.log('after rendering', this.state)
+        const { open, currentColor, colorBoxes } = this.state
+        const boxes = colorBoxes.map(color => {
+            return (
+                <div key={shortid.generate()}
+                    style={{
+                        backgroundColor: color,
+                        width: '20px',
+                        padding: '20px'
+                    }}
+                ></div>
+            )
+        })
 
         return (
             <div className={classes.root} >
@@ -69,7 +80,7 @@ class PaletteForm extends Component {
                         </IconButton>
                         <Typography variant="h6" noWrap>
                             Persistent drawer
-                    </Typography>
+                        </Typography>
                     </Toolbar>
                 </AppBar>
 
@@ -117,7 +128,6 @@ class PaletteForm extends Component {
                         variant="contained"
                         size="large"
                         className={classes.button}
-                        id='save-button'
                         startIcon={<SaveIcon />}
                     >Save</Button>
 
@@ -128,9 +138,11 @@ class PaletteForm extends Component {
                         [classes.contentShift]: open,
                     })}
                 >
+
                     <div className={classes.drawerHeader} />
 
-                    {/* dragable boxees goes here */}
+                    {boxes}
+
                 </main>
             </div>
         );
