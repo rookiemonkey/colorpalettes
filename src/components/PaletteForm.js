@@ -1,7 +1,9 @@
 import React from 'react';
+import { ChromePicker } from 'react-color'
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import SaveIcon from '@material-ui/icons/Save';
 import formStyles from '../styles/form';
 
 const PaletteForm = () => {
@@ -58,14 +61,43 @@ const PaletteForm = () => {
                 open={open}
                 classes={{
                     paper: classes.drawerPaper,
-                }}
-            >
+                }}>
+
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </div>
+
                 <Divider />
+
+                <Typography variant="h4" noWrap>
+                    Design your palette
+                </Typography>
+
+                <div>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                    >Clear</Button>
+
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                    >Random</Button>
+                </div>
+
+                <ChromePicker
+                />
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    className={classes.button}
+                    startIcon={<SaveIcon />}
+                >Save</Button>
+
             </Drawer>
 
             <main
