@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color'
 import shortid from 'shortid';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import classNames from 'classnames';
 import ColorBoxDraggable from './ColorBoxDraggable';
 import { withStyles } from '@material-ui/core/styles';
@@ -23,8 +24,20 @@ class PaletteForm extends Component {
         this.state = {
             open: false,
             currentColor: 'white',
+            colorName: '',
             colorBoxes: []
         }
+    }
+
+    componentDidMount() {
+        ValidatorForm.addValidationRule("isColorNameUnique", value =>
+            this.state.colorBoxes.every(
+                ({ name }) => name.toLowerCase() !== value.toLowerCase()
+            )
+        );
+        ValidatorForm.addValidationRule("isColorUnique", value =>
+            this.state.colorBoxes.every(({ color }) => color !== this.state.currentColor)
+        );
     }
 
     handleDrawerOpen = () => {
@@ -39,15 +52,26 @@ class PaletteForm extends Component {
         this.setState({ ...this.state, currentColor: newColor.hex })
     }
 
-    handleAddColor = () => {
-        const { currentColor, colorBoxes } = this.state
-        const newSet = [...colorBoxes, currentColor]
-        this.setState({ ...this.state, colorBoxes: newSet, currentColor: 'white' })
+    handleInputChange = e => {
+        const target = e.currentTarget
+        this.setState({ [target.name]: target.value })
+    }
+
+    handleAddColorInput = () => {
+        const newColor = {
+            color: this.state.currentColor,
+            name: this.state.colorName
+        }
+        this.setState({
+            currentColor: 'white',
+            colorName: '',
+            colorBoxes: [...this.state.colorBoxes, newColor]
+        })
     }
 
     render() {
         const { classes } = this.props
-        const { open, currentColor, colorBoxes } = this.state
+        const { open, currentColor, colorBoxes, colorName } = this.state
         const boxes = colorBoxes.map(color => {
             return <ColorBoxDraggable color={color} key={shortid.generate()} />
         })
@@ -119,14 +143,27 @@ class PaletteForm extends Component {
                         onChange={this.handleColorChange}
                     />
 
-                    <Button
-                        style={{ backgroundColor: currentColor }}
-                        onClick={this.handleAddColor}
-                        variant="contained"
-                        size="large"
-                        className={classes.button}
-                        startIcon={<SaveIcon />}
-                    >Save</Button>
+                    <ValidatorForm
+                        onSubmit={this.handleAddColorInput}
+                    >
+                        <TextValidator
+                            name='colorName'
+                            value={colorName}
+                            onChange={this.handleInputChange}
+                            validators={['required', 'isColorNameUnique', 'isColorUnique']}
+                            errorMessages={['Enter a color name', 'Color already existing', 'Color already used']}
+                        />
+
+                        <Button
+                            type='submit'
+                            style={{ backgroundColor: currentColor }}
+                            variant="contained"
+                            size="large"
+                            className={classes.button}
+                            startIcon={<SaveIcon />}
+                        >Save</Button>
+
+                    </ValidatorForm>
 
                 </Drawer>
 
