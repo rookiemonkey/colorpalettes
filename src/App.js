@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import Palette from './components/Palette';
 import PaletteSingle from './components/PaletteSingle';
+import PaletteForm from './components/PaletteForm';
 import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
 
@@ -25,9 +26,16 @@ class App extends Component {
         />
 
         <Route
-          exact path='/palette/:id'
+          exact path='/palette/new'
           render={props => {
-            const id = props.match.params.id;
+            return <PaletteForm />
+          }}
+        />
+
+        <Route
+          exact path='/palette/:id'
+          render={routerProps => {
+            const id = routerProps.match.params.id;
             if (!this.getPalette(id)) { return (<Redirect to="/" />) }
             const colors = this.getPalette(id)
             const palette = generatePalette(colors)
@@ -37,13 +45,13 @@ class App extends Component {
 
         <Route
           exact path='/palette/:id/:colorid'
-          render={props => {
-            const id = props.match.params.id;
+          render={routerProps => {
+            const id = routerProps.match.params.id;
             if (!this.getPalette(id)) { return (<Redirect to="/" />) }
-            const colorid = props.match.params.colorid;
+            const colorid = routerProps.match.params.colorid;
             const colors = this.getPalette(id)
             const palette = generatePalette(colors)
-            return <PaletteSingle palette={palette} colorId={colorid} {...props} />
+            return <PaletteSingle palette={palette} colorId={colorid} {...routerProps} />
           }}
         />
 
