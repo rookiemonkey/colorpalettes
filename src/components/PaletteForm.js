@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color'
+import shortid from 'shortid';
 import classNames from 'classnames';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,7 +20,9 @@ class PaletteForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            open: false,
+            currentColor: 'white',
+            colorBoxes: []
         }
     }
 
@@ -31,9 +34,30 @@ class PaletteForm extends Component {
         this.setState({ open: false })
     };
 
+    handleColorChange = newColor => {
+        this.setState({ ...this.state, currentColor: newColor.hex })
+    }
+
+    handleAddColor = () => {
+        const { currentColor, colorBoxes } = this.state
+        const newSet = [...colorBoxes, currentColor]
+        this.setState({ ...this.state, colorBoxes: newSet, currentColor: 'white' })
+    }
+
     render() {
         const { classes } = this.props
-        const { open } = this.state
+        const { open, currentColor, colorBoxes } = this.state
+        const boxes = colorBoxes.map(color => {
+            return (
+                <div key={shortid.generate()}
+                    style={{
+                        backgroundColor: color,
+                        width: '20px',
+                        padding: '20px'
+                    }}
+                ></div>
+            )
+        })
 
         return (
 
@@ -80,6 +104,11 @@ class PaletteForm extends Component {
 
                     <Divider />
 
+                    <Typography variant="h4" noWrap>
+                        Design your palette
+                    </Typography>
+
+
                     <div>
                         <Button
                             variant="contained"
@@ -93,9 +122,13 @@ class PaletteForm extends Component {
                     </div>
 
                     <ChromePicker
+                        color={currentColor}
+                        onChange={this.handleColorChange}
                     />
 
                     <Button
+                        style={{ backgroundColor: currentColor }}
+                        onClick={this.handleAddColor}
                         variant="contained"
                         size="large"
                         className={classes.button}
@@ -109,12 +142,10 @@ class PaletteForm extends Component {
                         [classes.contentShift]: open,
                     })}
                 >
+
                     <div className={classes.drawerHeader} />
 
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
+                    {boxes}
 
                 </main>
 
