@@ -38,6 +38,18 @@ class PaletteForm extends Component {
         );
     }
 
+    handleSavePalette = () => {
+        let newName = 'New Test Colors'
+        const newColor = {
+            paletteName: newName,
+            id: newName.toLowerCase().replaceAll(' ', '-'),
+            emoji: '😚',
+            colors: this.state.colorBoxes
+        }
+        this.props.savePalette(newColor)
+        this.props.history.push('/')
+    }
+
     handleDrawerOpen = () => {
         this.setState({ open: true })
     };
@@ -81,6 +93,7 @@ class PaletteForm extends Component {
 
                 <AppBar
                     position="fixed"
+                    color="default"
                     className={classNames(classes.appBar, {
                         [classes.appBarShift]: open,
                     })}
@@ -96,8 +109,15 @@ class PaletteForm extends Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap>
-                            Persistent drawer
+                            Create a palette
                         </Typography>
+
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={this.handleSavePalette}
+                        >Save Palette</Button>
+
                     </Toolbar>
                 </AppBar>
 
@@ -159,7 +179,7 @@ class PaletteForm extends Component {
                             size="large"
                             className={classes.button}
                             startIcon={<SaveIcon />}
-                        >Save</Button>
+                        >Add</Button>
 
                     </ValidatorForm>
 

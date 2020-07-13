@@ -8,9 +8,19 @@ import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      palettes: seeds
+    }
+  }
 
   getPalette = id => {
-    return seeds.find(p => { return p.id === id })
+    return this.state.palettes.find(p => { return p.id === id })
+  }
+
+  savePalette = newPalette => {
+    this.setState({ palettes: [...seeds, newPalette] }, () => { console.log(this.state) })
   }
 
   render() {
@@ -21,14 +31,14 @@ class App extends Component {
           exact
           path='/'
           render={(routerProps) => {
-            return < Home palettes={seeds} {...routerProps} />
+            return < Home palettes={this.state.palettes} {...routerProps} />
           }}
         />
 
         <Route
           exact path='/palette/new'
-          render={props => {
-            return <PaletteForm />
+          render={routerProps => {
+            return <PaletteForm savePalette={this.savePalette} {...routerProps} />
           }}
         />
 
