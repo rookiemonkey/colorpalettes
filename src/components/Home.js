@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import shortid from 'shortid';
 import homeStyles from '../styles/home';
@@ -28,6 +29,7 @@ class Home extends Component {
                 <div className={classes.container}>
                     <nav className={classes.nav}>
                         <h1>React Colors</h1>
+                        <Link to='/palette/new' style={{ color: 'white' }}>Add Palette</Link>
                     </nav>
                     <section className={classes.palettes}>
                         {minipalettes}
