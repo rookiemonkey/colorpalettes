@@ -31,9 +31,7 @@ class PaletteForm extends Component {
 
     componentDidMount() {
         ValidatorForm.addValidationRule("isColorNameUnique", value =>
-            this.state.colorBoxes.every(
-                ({ name }) => name.toLowerCase() !== value.toLowerCase()
-            )
+            this.state.colorBoxes.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
         );
         ValidatorForm.addValidationRule("isColorUnique", value =>
             this.state.colorBoxes.every(({ color }) => color !== this.state.currentColor)
