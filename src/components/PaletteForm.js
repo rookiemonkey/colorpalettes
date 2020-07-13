@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ChromePicker } from 'react-color'
 import shortid from 'shortid';
 import classNames from 'classnames';
+import ColorBoxDraggable from './ColorBoxDraggable';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -48,15 +49,7 @@ class PaletteForm extends Component {
         const { classes } = this.props
         const { open, currentColor, colorBoxes } = this.state
         const boxes = colorBoxes.map(color => {
-            return (
-                <div key={shortid.generate()}
-                    style={{
-                        backgroundColor: color,
-                        width: '20px',
-                        padding: '20px'
-                    }}
-                ></div>
-            )
+            return <ColorBoxDraggable color={color} key={shortid.generate()} />
         })
 
         return (
