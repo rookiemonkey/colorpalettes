@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import chroma from 'chroma-js';
 import { ChromePicker } from 'react-color'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import classNames from 'classnames';
@@ -80,6 +81,10 @@ class PaletteForm extends Component {
 
     handleClearColors = () => {
         this.setState({ ...this.state, colorBoxes: [] })
+    }
+
+    handleRandomColor = () => {
+        this.setState({ ...this.state, currentColor: chroma.random() })
     }
 
     handleAddColorInput = () => {
@@ -190,6 +195,7 @@ class PaletteForm extends Component {
                         <Button
                             variant="contained"
                             color="secondary"
+                            onClick={this.handleRandomColor}
                         >Random</Button>
                     </div>
 
