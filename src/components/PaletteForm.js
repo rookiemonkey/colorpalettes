@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color'
-import shortid from 'shortid';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import classNames from 'classnames';
-import ColorBoxDraggable from './ColorBoxDraggable';
+import ColorBoxDraggableList from './ColorBoxDraggableList';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -16,6 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import formStyles from '../styles/form';
+import arrayMove from '../helpers/arrayMove';
 
 class PaletteForm extends Component {
     constructor(props) {
@@ -90,16 +90,15 @@ class PaletteForm extends Component {
         })
     }
 
+    onSortEnd = ({ oldIndex, newIndex }) => {
+        this.setState(({ colorBoxes }) => ({
+            colorBoxes: arrayMove(colorBoxes, oldIndex, newIndex),
+        }));
+    };
+
     render() {
         const { classes } = this.props
         const { open, currentColor, colorBoxes, colorName } = this.state
-        const boxes = colorBoxes.map(color => {
-            return <ColorBoxDraggable
-                handleDelete={this.handleDelete}
-                color={color}
-                key={shortid.generate()}
-            />
-        })
 
         return (
 
@@ -225,7 +224,12 @@ class PaletteForm extends Component {
 
                     <div className={classes.drawerHeader} />
 
-                    {boxes}
+                    <ColorBoxDraggableList
+                        colorBoxes={colorBoxes}
+                        handleDelete={this.handleDelete}
+                        axis='xy' // drag up / down / or up & down
+                        onSortEnd={this.onSortEnd} // responsible for saving the new place of the dragged box
+                    />
 
                 </main>
 
