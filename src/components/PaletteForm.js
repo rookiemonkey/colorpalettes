@@ -25,7 +25,7 @@ class PaletteForm extends Component {
             paletteName: '',
             colorName: '',
             currentColor: '',
-            colorBoxes: []
+            colorBoxes: this.props.palettes[0].colors // starter
         }
     }
 
@@ -76,6 +76,10 @@ class PaletteForm extends Component {
                 name !== colorName
             )
         })
+    }
+
+    handleClearColors = () => {
+        this.setState({ ...this.state, colorBoxes: [] })
     }
 
     handleAddColorInput = () => {
@@ -180,6 +184,7 @@ class PaletteForm extends Component {
                         <Button
                             variant="contained"
                             color="primary"
+                            onClick={this.handleClearColors}
                         >Clear</Button>
 
                         <Button
