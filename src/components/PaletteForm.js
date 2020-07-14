@@ -24,7 +24,7 @@ class PaletteForm extends Component {
             open: false,
             paletteName: '',
             colorName: '',
-            currentColor: 'white',
+            currentColor: '',
             colorBoxes: []
         }
     }
@@ -201,7 +201,7 @@ class PaletteForm extends Component {
                             value={colorName}
                             onChange={this.handleInputChange}
                             validators={['required', 'isColorNameUnique', 'isColorUnique']}
-                            errorMessages={['Enter a color name', 'Color already existing', 'Color already used']}
+                            errorMessages={['Enter a color name', 'Color name already used', 'Color already added']}
                         />
 
                         <Button
