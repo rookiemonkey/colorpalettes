@@ -16,6 +16,13 @@ class PaletteFormNavBar extends Component {
         super(props)
     }
 
+    componentDidMount() {
+        ValidatorForm.addValidationRule("isNotEmpty", value => value !== '');
+        ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
+            this.props.palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
+        );
+    }
+
     render() {
 
         const { classes, isDrawerOpen, history, handleDrawerOpen, handleInputChange, handleSavePalette, paletteName } = this.props

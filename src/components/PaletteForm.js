@@ -39,10 +39,6 @@ class PaletteForm extends Component {
         ValidatorForm.addValidationRule("isColorUnique", value =>
             this.state.colorBoxes.every(({ color }) => color !== this.state.currentColor)
         );
-        ValidatorForm.addValidationRule("isNotEmpty", value => value !== '');
-        ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
-            this.props.palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
-        );
     }
 
     handleSavePalette = () => {
@@ -131,6 +127,7 @@ class PaletteForm extends Component {
                     handleSavePalette={this.handleSavePalette}
                     handleInputChange={this.handleInputChange}
                     paletteName={this.state.paletteName}
+                    palettes={this.props.palettes}
                 />
 
                 <Drawer
