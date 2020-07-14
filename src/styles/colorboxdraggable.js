@@ -9,7 +9,7 @@ const colorBoxDraggableStyles = {
         marginBottom: '-4.5px',
         '&:hover svg': {
             transform: 'scale(2)',
-            color: 'whitesmoke'
+            color: 'white'
         }
     },
     boxContent: {
@@ -27,6 +27,7 @@ const colorBoxDraggableStyles = {
     },
     icon: {
         fontSize: '12px',
+        color: 'rgba(0, 0, 0, 0.25)',
         transition: 'transform 250ms ease-in-out'
     }
 }
