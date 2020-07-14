@@ -123,6 +123,7 @@ class PaletteForm extends Component {
     render() {
         const { classes, maxColors } = this.props
         const { open, currentColor, colorBoxes, colorName } = this.state
+        const isFull = colorBoxes.length >= maxColors
 
         return (
 
@@ -211,7 +212,7 @@ class PaletteForm extends Component {
                             variant="contained"
                             color="secondary"
                             onClick={this.handleRandomColor}
-                            disabled={colorBoxes.length >= maxColors}
+                            disabled={isFull}
                         >Random</Button>
                     </div>
 
@@ -227,7 +228,7 @@ class PaletteForm extends Component {
                             name='colorName'
                             value={colorName}
                             onChange={this.handleInputChange}
-                            disabled={colorBoxes.length >= maxColors}
+                            disabled={isFull}
                             validators={['required', 'isColorNameUnique', 'isColorUnique']}
                             errorMessages={['Enter a color name', 'Color name already used', 'Color already added']}
                         />
@@ -238,8 +239,8 @@ class PaletteForm extends Component {
                             variant="contained"
                             size="large"
                             className={classes.button}
-                            disabled={colorBoxes.length >= maxColors}
-                        >Add</Button>
+                            disabled={isFull}
+                        >{isFull ? 'Palette full' : 'Add'}</Button>
 
                     </ValidatorForm>
 
