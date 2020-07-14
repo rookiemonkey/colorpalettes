@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   savePalette = newPalette => {
-    this.setState({ palettes: [...seeds, newPalette] }, () => { console.log(this.state) })
+    this.setState({ palettes: [...seeds, newPalette] })
   }
 
   render() {
@@ -38,7 +38,7 @@ class App extends Component {
         <Route
           exact path='/palette/new'
           render={routerProps => {
-            return <PaletteForm savePalette={this.savePalette} {...routerProps} />
+            return <PaletteForm savePalette={this.savePalette} {...routerProps} palettes={this.state.palettes} />
           }}
         />
 

@@ -15,7 +15,6 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import SaveIcon from '@material-ui/icons/Save';
 import formStyles from '../styles/form';
 
 class PaletteForm extends Component {
@@ -23,8 +22,9 @@ class PaletteForm extends Component {
         super(props);
         this.state = {
             open: false,
-            currentColor: 'white',
+            paletteName: '',
             colorName: '',
+            currentColor: 'white',
             colorBoxes: []
         }
     }
@@ -36,13 +36,16 @@ class PaletteForm extends Component {
         ValidatorForm.addValidationRule("isColorUnique", value =>
             this.state.colorBoxes.every(({ color }) => color !== this.state.currentColor)
         );
+        ValidatorForm.addValidationRule("isNotEmpty", value => value !== '');
+        ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
+            this.props.palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
+        );
     }
 
     handleSavePalette = () => {
-        let newName = 'New Test Colors'
         const newColor = {
-            paletteName: newName,
-            id: newName.toLowerCase().replaceAll(' ', '-'),
+            paletteName: this.state.paletteName,
+            id: this.state.paletteName.toLowerCase().replaceAll(' ', '-'),
             emoji: '😚',
             colors: this.state.colorBoxes
         }
@@ -115,8 +118,24 @@ class PaletteForm extends Component {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={this.handleSavePalette}
-                        >Save Palette</Button>
+                            onClick={this.props.history.goBack}
+                        >Go Back</Button>
+
+                        <ValidatorForm onSubmit={this.handleSavePalette}>
+                            <TextValidator
+                                label='Palette Name'
+                                name="paletteName"
+                                value={this.state.paletteName}
+                                onChange={this.handleInputChange}
+                                validators={['required', 'isNotEmpty', 'isPaletteNameUnique']}
+                                errorMessages={['Enter a palette name', 'Enter a palette name', 'Palette name already exisiting']}
+                            />
+                            <Button
+                                type='submit'
+                                variant="contained"
+                                color="primary"
+                            >Save Palette</Button>
+                        </ValidatorForm>
 
                     </Toolbar>
                 </AppBar>
@@ -178,7 +197,6 @@ class PaletteForm extends Component {
                             variant="contained"
                             size="large"
                             className={classes.button}
-                            startIcon={<SaveIcon />}
                         >Add</Button>
 
                     </ValidatorForm>
