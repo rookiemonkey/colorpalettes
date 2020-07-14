@@ -1,26 +1,9 @@
-const drawerWidth = 400;
+import CONFIG from './CONFIG';
+const { drawerWidth } = CONFIG;
 
 const formStyles = theme => ({
     root: {
         display: "flex"
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-        height: "100vh"
-    },
-    drawerPaper: {
-        width: drawerWidth,
-        display: "flex",
-        alignItems: "center"
-    },
-    drawerHeader: {
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        padding: "0 8px",
-        ...theme.mixins.toolbar,
-        justifyContent: "flex-end"
     },
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
@@ -39,6 +22,7 @@ const formStyles = theme => ({
     content: {
         flexGrow: 1,
         height: "calc(100vh - 64px)",
+        marginTop: '64px',
         padding: 0,
         transition: theme.transitions.create("margin", {
             easing: theme.transitions.easing.sharp,

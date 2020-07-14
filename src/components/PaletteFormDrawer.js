@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import formStyles from '../styles/form';
+import paletteFormDrawerStyles from '../styles/formdrawer';
 
 class PaletteFormDrawer extends Component {
 
@@ -104,4 +104,4 @@ class PaletteFormDrawer extends Component {
     }
 }
 
-export default withStyles(formStyles, { withTheme: true })(PaletteFormDrawer)
+export default withStyles(paletteFormDrawerStyles, { withTheme: true })(PaletteFormDrawer)
