@@ -10,7 +10,7 @@ const ColorBoxDraggableList = ({ colorBoxes, handleDelete }) => {
                 colorBoxes.map((color, i) => {
                     return <ColorBoxDraggable
                         index={i} // important for sorting
-                        handleDelete={handleDelete}
+                        handleDelete={() => { handleDelete(color.name) }}
                         color={color}
                         key={shortid.generate()}
                     />

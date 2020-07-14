@@ -40,10 +40,6 @@ const ColorBoxDraggable = SortableElement(props => {
 
     const { classes, handleDelete, color } = props
 
-    function handleDeleteCallBack() {
-        handleDelete(color.name)
-    }
-
     return (
         <div
             className={classes.root}
@@ -54,7 +50,7 @@ const ColorBoxDraggable = SortableElement(props => {
                 <span>{color.name}</span>
                 <span><DeleteIcon
                     className={classes.icon}
-                    onClick={handleDeleteCallBack}
+                    onClick={handleDelete}
                 /></span>
             </div>
 

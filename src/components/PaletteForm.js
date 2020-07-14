@@ -259,6 +259,7 @@ class PaletteForm extends Component {
                         handleDelete={this.handleDelete}
                         axis='xy' // drag up / down / or up & down
                         onSortEnd={this.onSortEnd} // responsible for saving the new place of the dragged box
+                        distance={20} // where dragging can start, if not set delete will not work instead drag event will occur and not click event
                     />
 
                 </main>
