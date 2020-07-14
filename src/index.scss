@@ -7,6 +7,16 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+::-moz-selection {
+    background-color: transparent;
+    color: #000;
+}
+
+::selection {
+    background-color: transparent;
+    color: #000;
+}
+
 @import './styles/palette.scss';
 @import './styles/colorbox.scss';
 @import './styles//colorboxsingle.scss';
