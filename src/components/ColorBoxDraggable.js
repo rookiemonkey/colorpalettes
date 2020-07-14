@@ -5,13 +5,13 @@ import DeleteIcon from '@material-ui/icons/Delete';;
 
 const ColorBoxDraggableStyles = {
     root: {
-        height: '20%',
+        height: '25%',
         width: '20%',
         margin: '0 auto',
         display: 'inline-block',
         position: 'relative',
         cursor: 'pointer',
-        marginButton: '-3.5px',
+        marginBottom: '-4.5px',
         '&:hover svg': {
             transform: 'scale(2)',
             color: 'whitesmoke'
