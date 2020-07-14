@@ -43,23 +43,25 @@ class PaletteFormDrawer extends Component {
             >
 
                 <div className={classes.drawerHeader}>
+
+                    <Typography variant="h6">
+                        DESIGN YOUR PALETTE
+                    </Typography>
+
                     <IconButton onClick={handleDrawerClose}>
                         <ChevronLeftIcon />
                     </IconButton>
+
                 </div>
 
                 <Divider />
 
-                <Typography variant="h4" noWrap>
-                    Design your palette
-                </Typography>
-
-
-                <div>
+                <div className={classes.drawerButtonsContainer}>
                     <Button
                         variant="contained"
                         color="primary"
                         onClick={handleClearColors}
+                        className={classes.drawerButton}
                     >Clear</Button>
 
                     <Button
@@ -67,22 +69,27 @@ class PaletteFormDrawer extends Component {
                         color="secondary"
                         onClick={handleRandomColor}
                         disabled={isFull}
+                        className={classes.drawerButton}
                     >Random</Button>
                 </div>
 
                 <ChromePicker
                     color={currentColor}
                     onChange={handleColorChange}
+                    className={classes.drawerColorPicker}
                 />
 
                 <ValidatorForm
                     onSubmit={handleAddColorInput}
                 >
                     <TextValidator
+                        placeholder='Color Name'
+                        variant='filled'
                         name='colorName'
                         value={colorName}
                         onChange={handleInputChange}
                         disabled={isFull}
+                        className={classes.drawerInputField}
                         validators={['required', 'isColorNameUnique', 'isColorUnique']}
                         errorMessages={['Enter a color name', 'Color name already used', 'Color already added']}
                     />
@@ -92,7 +99,7 @@ class PaletteFormDrawer extends Component {
                         style={{ backgroundColor: currentColor }}
                         variant="contained"
                         size="large"
-                        className={classes.button}
+                        className={classes.drawerAddButton}
                         disabled={isFull}
                     >{isFull ? 'Palette full' : 'Add'}</Button>
 
