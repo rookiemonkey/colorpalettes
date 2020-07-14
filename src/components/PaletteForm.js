@@ -70,6 +70,14 @@ class PaletteForm extends Component {
         this.setState({ [target.name]: target.value })
     }
 
+    handleDelete = colorName => {
+        this.setState({
+            ...this.state, colorBoxes: this.state.colorBoxes.filter(({ name }) =>
+                name !== colorName
+            )
+        })
+    }
+
     handleAddColorInput = () => {
         const newColor = {
             color: this.state.currentColor,
@@ -86,7 +94,11 @@ class PaletteForm extends Component {
         const { classes } = this.props
         const { open, currentColor, colorBoxes, colorName } = this.state
         const boxes = colorBoxes.map(color => {
-            return <ColorBoxDraggable color={color} key={shortid.generate()} />
+            return <ColorBoxDraggable
+                handleDelete={this.handleDelete}
+                color={color}
+                key={shortid.generate()}
+            />
         })
 
         return (
@@ -102,6 +114,7 @@ class PaletteForm extends Component {
                     })}
                 >
                     <Toolbar disableGutters={!open}>
+
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
@@ -111,6 +124,7 @@ class PaletteForm extends Component {
                         >
                             <MenuIcon />
                         </IconButton>
+
                         <Typography variant="h6" noWrap>
                             Create a palette
                         </Typography>
