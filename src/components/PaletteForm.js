@@ -19,6 +19,13 @@ import formStyles from '../styles/form';
 import arrayMove from '../helpers/arrayMove';
 
 class PaletteForm extends Component {
+    static defaultProps = {
+        maxColors: 20
+    }
+
+    // disable the add button
+    // add middleware for submit 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -88,15 +95,23 @@ class PaletteForm extends Component {
     }
 
     handleAddColorInput = () => {
-        const newColor = {
-            color: this.state.currentColor,
-            name: this.state.colorName
+        if (this.state.colorBoxes.length <= 20) {
+            const newColor = {
+                color: this.state.currentColor,
+                name: this.state.colorName
+            }
+            this.setState({
+                currentColor: 'white',
+                colorName: '',
+                colorBoxes: [...this.state.colorBoxes, newColor]
+            })
+        } else {
+            this.setState({
+                paletteName: '',
+                colorName: '',
+                currentColor: '',
+            })
         }
-        this.setState({
-            currentColor: 'white',
-            colorName: '',
-            colorBoxes: [...this.state.colorBoxes, newColor]
-        })
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
@@ -106,7 +121,7 @@ class PaletteForm extends Component {
     };
 
     render() {
-        const { classes } = this.props
+        const { classes, maxColors } = this.props
         const { open, currentColor, colorBoxes, colorName } = this.state
 
         return (
@@ -196,6 +211,7 @@ class PaletteForm extends Component {
                             variant="contained"
                             color="secondary"
                             onClick={this.handleRandomColor}
+                            disabled={colorBoxes.length >= maxColors}
                         >Random</Button>
                     </div>
 
@@ -211,6 +227,7 @@ class PaletteForm extends Component {
                             name='colorName'
                             value={colorName}
                             onChange={this.handleInputChange}
+                            disabled={colorBoxes.length >= maxColors}
                             validators={['required', 'isColorNameUnique', 'isColorUnique']}
                             errorMessages={['Enter a color name', 'Color name already used', 'Color already added']}
                         />
@@ -221,6 +238,7 @@ class PaletteForm extends Component {
                             variant="contained"
                             size="large"
                             className={classes.button}
+                            disabled={colorBoxes.length >= maxColors}
                         >Add</Button>
 
                     </ValidatorForm>
