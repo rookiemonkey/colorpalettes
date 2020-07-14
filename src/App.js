@@ -31,14 +31,21 @@ class App extends Component {
           exact
           path='/'
           render={(routerProps) => {
-            return < Home palettes={this.state.palettes} {...routerProps} />
+            return <Home
+              palettes={this.state.palettes}
+              {...routerProps}
+            />
           }}
         />
 
         <Route
           exact path='/palette/new'
           render={routerProps => {
-            return <PaletteForm savePalette={this.savePalette} {...routerProps} palettes={this.state.palettes} />
+            return <PaletteForm
+              palettes={this.state.palettes}
+              savePalette={this.savePalette}
+              {...routerProps}
+            />
           }}
         />
 
@@ -49,7 +56,9 @@ class App extends Component {
             if (!this.getPalette(id)) { return (<Redirect to="/" />) }
             const colors = this.getPalette(id)
             const palette = generatePalette(colors)
-            return <Palette palette={palette} />
+            return <Palette
+              palette={palette}
+            />
           }}
         />
 
@@ -61,7 +70,11 @@ class App extends Component {
             const colorid = routerProps.match.params.colorid;
             const colors = this.getPalette(id)
             const palette = generatePalette(colors)
-            return <PaletteSingle palette={palette} colorId={colorid} {...routerProps} />
+            return <PaletteSingle
+              palette={palette}
+              colorId={colorid}
+              {...routerProps}
+            />
           }}
         />
 
