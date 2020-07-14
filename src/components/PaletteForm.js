@@ -8,28 +8,23 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import formStyles from '../styles/form';
 import arrayMove from '../helpers/arrayMove';
+import PaletteFormNavBar from './PaletteFormNavBar';
 
 class PaletteForm extends Component {
     static defaultProps = {
         maxColors: 20
     }
 
-    // disable the add button
-    // add middleware for submit 
-
     constructor(props) {
         super(props);
         this.state = {
-            open: false,
+            isDrawerOpen: false,
             paletteName: '',
             colorName: '',
             currentColor: '',
@@ -62,11 +57,11 @@ class PaletteForm extends Component {
     }
 
     handleDrawerOpen = () => {
-        this.setState({ open: true })
+        this.setState({ isDrawerOpen: true })
     };
 
     handleDrawerClose = () => {
-        this.setState({ open: false })
+        this.setState({ isDrawerOpen: false })
     };
 
     handleColorChange = newColor => {
@@ -122,7 +117,7 @@ class PaletteForm extends Component {
 
     render() {
         const { classes, maxColors } = this.props
-        const { open, currentColor, colorBoxes, colorName } = this.state
+        const { isDrawerOpen, currentColor, colorBoxes, colorName } = this.state
         const isFull = colorBoxes.length >= maxColors
 
         return (
@@ -130,59 +125,19 @@ class PaletteForm extends Component {
             < div className={classes.root} >
                 <CssBaseline />
 
-                <AppBar
-                    position="fixed"
-                    color="default"
-                    className={classNames(classes.appBar, {
-                        [classes.appBarShift]: open,
-                    })}
-                >
-                    <Toolbar disableGutters={!open}>
-
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={this.handleDrawerOpen}
-                            edge="start"
-                            className={classNames(classes.menuButton, open && classes.hide)}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-
-                        <Typography variant="h6" noWrap>
-                            Create a palette
-                        </Typography>
-
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={this.props.history.goBack}
-                        >Go Back</Button>
-
-                        <ValidatorForm onSubmit={this.handleSavePalette}>
-                            <TextValidator
-                                label='Palette Name'
-                                name="paletteName"
-                                value={this.state.paletteName}
-                                onChange={this.handleInputChange}
-                                validators={['required', 'isNotEmpty', 'isPaletteNameUnique']}
-                                errorMessages={['Enter a palette name', 'Enter a palette name', 'Palette name already exisiting']}
-                            />
-                            <Button
-                                type='submit'
-                                variant="contained"
-                                color="primary"
-                            >Save Palette</Button>
-                        </ValidatorForm>
-
-                    </Toolbar>
-                </AppBar>
+                <PaletteFormNavBar
+                    isDrawerOpen={isDrawerOpen}
+                    handleDrawerOpen={this.handleDrawerOpen}
+                    handleSavePalette={this.handleSavePalette}
+                    handleInputChange={this.handleInputChange}
+                    paletteName={this.state.paletteName}
+                />
 
                 <Drawer
                     className={classes.drawer}
                     variant="persistent"
                     anchor="left"
-                    open={open}
+                    open={isDrawerOpen}
                     classes={{
                         paper: classes.drawerPaper,
                     }}
@@ -248,7 +203,7 @@ class PaletteForm extends Component {
 
                 <main
                     className={classNames(classes.content, {
-                        [classes.contentShift]: open,
+                        [classes.contentShift]: isDrawerOpen,
                     })}
                 >
 
