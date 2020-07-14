@@ -49,14 +49,10 @@ class PaletteFormNavBar extends Component {
 
                     <Typography variant="h6" noWrap>
                         Create a palette
-                        </Typography>
+                    </Typography>
+                </Toolbar>
 
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={history.goBack}
-                    >Go Back</Button>
-
+                <div className={classes.appBarButtons}>
                     <ValidatorForm onSubmit={handleSavePalette}>
                         <TextValidator
                             label='Palette Name'
@@ -71,9 +67,16 @@ class PaletteFormNavBar extends Component {
                             variant="contained"
                             color="primary"
                         >Save Palette</Button>
+
                     </ValidatorForm>
 
-                </Toolbar>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={history.goBack}
+                    >Go Back</Button>
+                </div>
+
             </AppBar>
         )
     }
