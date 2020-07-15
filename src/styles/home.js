@@ -1,12 +1,15 @@
 import mq from '../helpers/getMediaQuery'
+import bg from '../images/Flat-Mountains.svg'
 
 const homeStyles = {
     root: {
-        backgroundColor: 'blue',
+        // background by: SVGBacgrounds.com
+        backgroundImage: `url(${bg})`,
         height: '100vh',
         display: 'flex',
         alignItems: 'flex-start',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        overflow: 'scroll',
     },
     nav: {
         display: 'flex',
