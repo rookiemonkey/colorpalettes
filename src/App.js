@@ -26,6 +26,12 @@ class App extends Component {
     })
   }
 
+  deletePalette = id => {
+    this.setState({ palettes: this.state.palettes.filter(p => { return p.id !== id }) }, () => {
+      window.localStorage.setItem('palettes', JSON.stringify(this.state.palettes))
+    })
+  }
+
   render() {
     return (
       <Switch>
@@ -36,6 +42,7 @@ class App extends Component {
           render={(routerProps) => {
             return <Home
               palettes={this.state.palettes}
+              deletePalette={this.deletePalette}
               {...routerProps}
             />
           }}

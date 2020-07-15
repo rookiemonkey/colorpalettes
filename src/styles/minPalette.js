@@ -40,9 +40,6 @@ const miniPaletteStyles = {
         position: 'relative',
         marginBottom: '-3.5px'
     },
-    deleteIconContainer: {
-
-    },
     deleteIcon: {
         width: '24px',
         height: '24px',

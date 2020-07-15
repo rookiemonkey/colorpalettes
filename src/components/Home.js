@@ -11,6 +11,10 @@ class Home extends Component {
         this.props.history.push(`/palette/${id}`)
     }
 
+    helpDeletePalette = id => {
+        this.props.deletePalette(id)
+    }
+
     render() {
 
         const { palettes, classes } = this.props
@@ -20,6 +24,7 @@ class Home extends Component {
                     {...palettes[i]}
                     key={shortid.generate()}
                     handleClick={this.handleClick}
+                    deletePalette={this.helpDeletePalette}
                 />
             )
         })
