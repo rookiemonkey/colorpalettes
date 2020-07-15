@@ -1,3 +1,5 @@
+import mq from '../helpers/getMediaQuery'
+
 const navBarStyles = {
     NavbarContainer: {
         padding: '0px 1rem',
@@ -16,6 +18,10 @@ const navBarStyles = {
         display: 'flex',
         alignItems: 'center',
 
+        [mq.down('xs')]: {
+            display: 'none'
+        },
+
         '& a': {
             textDecoration: 'none',
         }
@@ -31,9 +37,13 @@ const navBarStyles = {
         },
 
         '& .Navbar-slider': {
-            width: '150px',
+            width: '350px',
             margin: '0px 10px',
             display: 'inline-block',
+
+            [mq.down('md')]: {
+                width: '150px'
+            },
 
             '& .rc-slider-track': {
                 backgroundColor: 'transparent'

@@ -1,3 +1,5 @@
+import mq from '../helpers/getMediaQuery'
+
 const colorBoxDraggableStyles = {
     root: {
         height: '25%',
@@ -10,7 +12,22 @@ const colorBoxDraggableStyles = {
         '&:hover svg': {
             transform: 'scale(2)',
             color: 'white'
-        }
+        },
+
+        [mq.down('lg')]: {
+            width: '25%',
+            height: '20%'
+        },
+
+        [mq.down('md')]: {
+            width: '50%',
+            height: '10%'
+        },
+
+        [mq.down('sm')]: {
+            width: '100%',
+            height: '5%'
+        },
     },
     boxContent: {
         position: 'absolute',
