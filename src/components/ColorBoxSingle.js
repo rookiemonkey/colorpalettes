@@ -41,7 +41,7 @@ class ColorBoxSingle extends Component {
 
                 <div className="ColorBox-copy-container" >
                     <div className="ColorBox-content-container">
-                        <span className='ColorBox-name' style={t}>{colorName}</span>
+                        <span style={t}>{colorName}</span>
                     </div>
                     <CopyToClipboard text={background}>
                         <button
