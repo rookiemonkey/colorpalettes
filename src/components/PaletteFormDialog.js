@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 
 class PaletteFormDialog extends Component {
     constructor(props) {
@@ -48,6 +48,7 @@ class PaletteFormDialog extends Component {
                 >
                     <DialogContent>
                         <ValidatorForm onSubmit={helpHandleSavePalette}>
+
                             <TextValidator
                                 label='Palette Name'
                                 name="paletteName"
@@ -57,11 +58,20 @@ class PaletteFormDialog extends Component {
                                 errorMessages={['Enter a palette name', 'Enter a palette name', 'Palette name already exisiting']}
                             />
 
-                            <Button
-                                type='submit'
-                                variant="contained"
-                                color="primary"
-                            >Save Palette</Button>
+                            <DialogActions>
+
+                                <Button
+                                    type='submit'
+                                    variant="contained"
+                                    color="primary"
+                                >Save Palette</Button>
+
+                                <Button
+                                    onClick={this.handleClose}
+                                    color="primary"
+                                >Cancel</Button>
+
+                            </DialogActions>
                         </ValidatorForm>
                     </DialogContent>
                 </Dialog>
