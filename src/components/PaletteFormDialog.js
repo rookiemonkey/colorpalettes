@@ -31,55 +31,53 @@ class PaletteFormDialog extends Component {
         const { open, handleCloseDialog, helpHandleSavePalette, paletteName } = this.props
 
         return (
-            <div>
-                <Dialog
-                    open={open}
-                    onClose={handleCloseDialog}
-                    aria-labelledby="form-dialog-title"
-                >
+            <Dialog
+                open={open}
+                onClose={handleCloseDialog}
+                aria-labelledby="form-dialog-title"
+            >
 
-                    <DialogTitle id="form-dialog-title">
-                        Enter a name for your palette
+                <DialogTitle id="form-dialog-title">
+                    Enter a name for your palette
                     </DialogTitle>
 
-                    <DialogContent>
+                <DialogContent>
 
-                        <DialogContentText>
-                            Please give a name for your palette. Make sure taht it is unique.
+                    <DialogContentText>
+                        Please give a name for your palette. Make sure taht it is unique.
                         </DialogContentText>
 
-                        <ValidatorForm onSubmit={helpHandleSavePalette}>
+                    <ValidatorForm onSubmit={helpHandleSavePalette}>
 
-                            <TextValidator
-                                label='Palette Name'
-                                name="paletteName"
-                                value={paletteName}
-                                onChange={this.paletteNameChange}
-                                fullWidth={true}
-                                margin='normal'
-                                validators={['required', 'isNotEmpty', 'isPaletteNameUnique']}
-                                errorMessages={['Enter a palette name', 'Enter a palette name', 'Palette name already exisiting']}
-                            />
+                        <TextValidator
+                            label='Palette Name'
+                            name="paletteName"
+                            value={paletteName}
+                            onChange={this.paletteNameChange}
+                            fullWidth={true}
+                            margin='normal'
+                            validators={['required', 'isNotEmpty', 'isPaletteNameUnique']}
+                            errorMessages={['Enter a palette name', 'Enter a palette name', 'Palette name already exisiting']}
+                        />
 
-                            <DialogActions>
+                        <DialogActions>
 
-                                <Button
-                                    type='submit'
-                                    variant="contained"
-                                    color="primary"
-                                >Save Palette</Button>
+                            <Button
+                                type='submit'
+                                variant="contained"
+                                color="primary"
+                            >Save Palette</Button>
 
-                                <Button
-                                    onClick={handleCloseDialog}
-                                    color="primary"
-                                >Cancel</Button>
+                            <Button
+                                onClick={handleCloseDialog}
+                                color="primary"
+                            >Cancel</Button>
 
-                            </DialogActions>
+                        </DialogActions>
 
-                        </ValidatorForm>
-                    </DialogContent>
-                </Dialog>
-            </div>
+                    </ValidatorForm>
+                </DialogContent>
+            </Dialog>
         );
     }
 }
