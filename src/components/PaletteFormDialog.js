@@ -13,7 +13,8 @@ class PaletteFormDialog extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false
+            step: 'form-paletteName',
+            currentEmoji: ''
         };
     }
 
@@ -28,41 +29,88 @@ class PaletteFormDialog extends Component {
         this.props.helpHandlePaletteNameChange(e.target.value)
     }
 
+    handleNextStep = () => {
+        this.setState({ ...this.state, step: 'form-emoji' })
+    }
+
+    emojiChange = emoji => {
+        this.setState({ currentEmoji: emoji.native })
+
+    }
+
+    handleSubmit = () => {
+        this.props.helpHandleSavePalette(this.state.currentEmoji)
+        this.setState({ step: 'form-paletteName', currentEmoji: '' })
+    }
+
     render() {
 
-        const { open, handleCloseDialog, helpHandleSavePalette, paletteName } = this.props
+        const { handleCloseDialog, paletteName } = this.props
 
         return (
-            <Dialog
-                open={open}
-                onClose={handleCloseDialog}
-                aria-labelledby="form-dialog-title"
-            >
+            <>
+                <Dialog
+                    open={this.state.step === 'form-paletteName'}
+                    onClose={handleCloseDialog}
+                    aria-labelledby="form-dialog-title"
+                >
 
-                <DialogTitle id="form-dialog-title">
-                    Enter a name for your palette
+                    <DialogTitle id="form-dialog-title">
+                        Enter a name for your palette 🖌
                 </DialogTitle>
 
-                <Picker />
+                    <DialogContent>
 
-                <DialogContent>
+                        <DialogContentText>
+                            Please give a name for your palette. Make sure that it is unique.
+                        </DialogContentText>
 
-                    <DialogContentText>
-                        Please give a name for your palette. Make sure taht it is unique.
-                    </DialogContentText>
+                        <ValidatorForm onSubmit={this.handleNextStep}>
 
-                    <ValidatorForm onSubmit={helpHandleSavePalette}>
+                            <TextValidator
+                                label='Palette Name'
+                                name="paletteName"
+                                value={paletteName}
+                                onChange={this.paletteNameChange}
+                                fullWidth={true}
+                                margin='normal'
+                                validators={['required', 'isNotEmpty', 'isPaletteNameUnique']}
+                                errorMessages={['Enter a palette name', 'Enter a palette name', 'Palette name already exisiting']}
+                            />
 
-                        <TextValidator
-                            label='Palette Name'
-                            name="paletteName"
-                            value={paletteName}
-                            onChange={this.paletteNameChange}
-                            fullWidth={true}
-                            margin='normal'
-                            validators={['required', 'isNotEmpty', 'isPaletteNameUnique']}
-                            errorMessages={['Enter a palette name', 'Enter a palette name', 'Palette name already exisiting']}
-                        />
+                            <DialogActions>
+
+                                <Button
+                                    type='submit'
+                                    variant="contained"
+                                    color="primary"
+                                >Save Name</Button>
+
+                                <Button
+                                    onClick={handleCloseDialog}
+                                    color="primary"
+                                >Cancel</Button>
+
+                            </DialogActions>
+
+                        </ValidatorForm>
+                    </DialogContent>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.step === 'form-emoji'}
+                    onClose={handleCloseDialog}
+                    aria-labelledby="form-dialog-title"
+                >
+
+                    <DialogContent>
+
+                        <DialogContentText>
+                            Please select an emoji that describes your palette.
+                            Chosen Emoji: {this.state.currentEmoji}
+                        </DialogContentText>
+
+                        <Picker onSelect={this.emojiChange} />
 
                         <DialogActions>
 
@@ -70,6 +118,7 @@ class PaletteFormDialog extends Component {
                                 type='submit'
                                 variant="contained"
                                 color="primary"
+                                onClick={this.handleSubmit}
                             >Save Palette</Button>
 
                             <Button
@@ -79,9 +128,11 @@ class PaletteFormDialog extends Component {
 
                         </DialogActions>
 
-                    </ValidatorForm>
-                </DialogContent>
-            </Dialog>
+                    </DialogContent>
+
+                </Dialog>
+
+            </>
         );
     }
 }

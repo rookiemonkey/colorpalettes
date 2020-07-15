@@ -31,8 +31,8 @@ class PaletteFormNavBar extends Component {
         this.props.handlePaletteNameChange(name)
     }
 
-    helpHandleSavePalette = () => {
-        this.props.handleSavePalette()
+    helpHandleSavePalette = emoji => {
+        this.props.handleSavePalette(emoji)
     }
 
     render() {
@@ -89,7 +89,6 @@ class PaletteFormNavBar extends Component {
                         ? <PaletteFormDialog
                             palettes={palettes}
                             paletteName={paletteName}
-                            open={this.state.open}
                             handleCloseDialog={this.handleCloseDialog}
                             helpHandleSavePalette={this.helpHandleSavePalette}
                             helpHandlePaletteNameChange={this.helpHandlePaletteNameChange}
