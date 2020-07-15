@@ -69,12 +69,14 @@ class PaletteFormNavBar extends Component {
                 <div className={classes.appBarButtons}>
 
                     <Button
+                        className={classes.appBarButton}
                         variant="contained"
                         color="primary"
                         onClick={history.goBack}
                     >Go Back</Button>
 
                     <Button
+                        className={classes.appBarButton}
                         variant="outlined"
                         color="primary"
                         onClick={this.handleOpenDialog}

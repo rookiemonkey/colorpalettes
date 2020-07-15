@@ -10,6 +10,7 @@ const formNavBarStyles = theme => ({
         }),
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         height: '64px'
     },
     appBarShift: {
@@ -21,7 +22,10 @@ const formNavBarStyles = theme => ({
         }),
     },
     appBarButtons: {
-
+        marginRight: '1rem'
+    },
+    appBarButton: {
+        margin: '0 0.5rem'
     }
 })
 
