@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import chroma, { random } from 'chroma-js';
+import chroma from 'chroma-js';
 import classNames from 'classnames';
 import ColorBoxDraggableList from './ColorBoxDraggableList';
 import { withStyles } from '@material-ui/core/styles';

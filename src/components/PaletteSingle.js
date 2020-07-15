@@ -5,7 +5,7 @@ import shortid from 'shortid';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import ColorBoxSingle from './ColorBoxSingle';
-import renderBackButton from '../helpers/renderBackButton';
+import BackButton from './BackButton';
 
 class PaletteSingle extends Component {
     constructor(props) {
@@ -68,7 +68,7 @@ class PaletteSingle extends Component {
 
                 <div className="Palette-colors">
                     {b}
-                    {renderBackButton({ goBack: this.goBack })}
+                    <BackButton goBack={this.goBack} />
                 </div>
 
                 <Snackbar
