@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import shortid from 'shortid';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import ColorBoxSingle from './ColorBoxSingle';
 import BackButton from './BackButton';
+import paletteStyles from '../styles/palette';
 
 class PaletteSingle extends Component {
     constructor(props) {
@@ -46,6 +48,7 @@ class PaletteSingle extends Component {
 
         if (!this.props.palette) { return (<Redirect to="/" />) }
         const { paletteName, emoji } = this.props.palette;
+        const { classes } = this.props
         const b = this._shades.map(c => {
             if (c.hex === '#ffffff') return null
             return (
@@ -58,7 +61,7 @@ class PaletteSingle extends Component {
         })
 
         return (
-            <div className='Palette'>
+            <div className={classes.Palette}>
 
                 <NavBar
                     changeFormat={this.changeFormat}
@@ -66,7 +69,7 @@ class PaletteSingle extends Component {
                     level=''
                 />
 
-                <div className="Palette-colors">
+                <div className={classes.PaletteColors}>
                     {b}
                     <BackButton goBack={this.goBack} />
                 </div>
@@ -94,4 +97,4 @@ class PaletteSingle extends Component {
     }
 }
 
-export default PaletteSingle;
+export default withStyles(paletteStyles)(PaletteSingle);

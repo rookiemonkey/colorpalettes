@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { withStyles } from '@material-ui/styles';
 import generateTextColor from '../helpers/generateTextColor';
+import colorBoxSingleStyles from '../styles/colorboxsingle';
 
 class ColorBoxSingle extends Component {
     constructor(props) {
@@ -17,7 +19,7 @@ class ColorBoxSingle extends Component {
     render() {
 
         const { copied } = this.state;
-        const { background, colorName } = this.props;
+        const { classes, background, colorName } = this.props;
         const b = { background }
         const t = { color: generateTextColor(background) }
         let shadow; if (t.color === 'white') { shadow = 'black' } else { shadow = 'white' }
@@ -26,27 +28,32 @@ class ColorBoxSingle extends Component {
             textShadow: `1px 2px ${shadow}`
         }
         return (
-            <div className="ColorBox-container" style={b} id="ColorBox-single">
+            <div className={classes.ColorBoxContainer} style={b}>
 
                 <div
-                    className={copied ? 'ColorBox-overlay ColorBox-copied' : 'ColorBox-overlay'}
+                    className={copied
+                        ? `${classes.ColorBoxOverlay} ${classes.ColorBoxCopied}`
+                        : `${classes.ColorBoxOverlay}`}
                     style={b}
                 ></div>
 
-                <div className={copied ? 'ColorBox-overlay-message show' : 'ColorBox-overlay-message'}>
+                <div className={copied
+                    ? `${classes.ColorBoxOverlayMessage} ${classes.Show}`
+                    : `${classes.ColorBoxOverlayMessage}`}
+                >
                     <h1 style={s}>COPIED!</h1>
                     <p style={s}>{colorName}</p>
                     <p style={s}>{background}</p>
                 </div>
 
-                <div className="ColorBox-copy-container" >
-                    <div className="ColorBox-content-container">
+                <div>
+                    <div className={classes.ColorBoxContentContainer}>
                         <span style={t}>{colorName}</span>
                     </div>
                     <CopyToClipboard text={background}>
                         <button
                             onClick={this.handleCopy}
-                            className="ColorBox-copy"
+                            className={classes.ColorBoxCopy}
                             style={t}
                         >COPY</button>
                     </CopyToClipboard>
@@ -57,4 +64,4 @@ class ColorBoxSingle extends Component {
     }
 }
 
-export default ColorBoxSingle;
+export default withStyles(colorBoxSingleStyles)(ColorBoxSingle);
