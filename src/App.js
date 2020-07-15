@@ -6,6 +6,7 @@ import PaletteSingle from './components/PaletteSingle';
 import PaletteForm from './components/PaletteForm';
 import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
+import { seed } from 'shortid';
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +21,8 @@ class App extends Component {
   }
 
   savePalette = newPalette => {
-    this.setState({ palettes: [...seeds, newPalette] })
+    seeds.push(newPalette)
+    this.setState({ palettes: [...seeds] })
   }
 
   render() {
