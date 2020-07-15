@@ -8,10 +8,11 @@ import formStyles from '../styles/form';
 import arrayMove from '../helpers/arrayMove';
 import PaletteFormNavBar from './PaletteFormNavBar';
 import PaletteFormDrawer from './PaletteFormDrawer'
+import starter from '../helpers/starter';
 
 class PaletteForm extends Component {
     static defaultProps = {
-        maxColors: 20
+        maxColors: 20,
     }
 
     constructor(props) {
@@ -21,7 +22,7 @@ class PaletteForm extends Component {
             paletteName: '',
             colorName: '',
             currentColor: '',
-            colorBoxes: this.props.palettes[0].colors // starter
+            colorBoxes: starter
         }
     }
 
