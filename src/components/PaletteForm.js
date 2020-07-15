@@ -53,6 +53,10 @@ class PaletteForm extends Component {
         this.setState({ [target.name]: target.value })
     }
 
+    handlePaletteNameChange = name => {
+        this.setState({ ...this.state, paletteName: name })
+    }
+
     handleDelete = colorName => {
         this.setState({
             ...this.state, colorBoxes: this.state.colorBoxes.filter(({ name }) =>
@@ -97,7 +101,7 @@ class PaletteForm extends Component {
 
     render() {
         const { classes, maxColors } = this.props
-        const { isDrawerOpen, colorBoxes } = this.state
+        const { isDrawerOpen, colorBoxes, paletteName } = this.state
         const isFull = colorBoxes.length >= maxColors
 
         return (
@@ -107,10 +111,10 @@ class PaletteForm extends Component {
 
                 <PaletteFormNavBar
                     isDrawerOpen={isDrawerOpen}
+                    paletteName={paletteName}
                     handleDrawerOpen={this.handleDrawerOpen}
                     handleSavePalette={this.handleSavePalette}
-                    handleInputChange={this.handleInputChange}
-                    paletteName={this.state.paletteName}
+                    handlePaletteNameChange={this.handlePaletteNameChange}
                     palettes={this.props.palettes}
                 />
 

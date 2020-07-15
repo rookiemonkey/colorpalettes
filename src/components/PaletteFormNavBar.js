@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import classNames from 'classnames';
+import PaletteFormDialog from './PaletteFormDialog';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,16 +16,19 @@ class PaletteFormNavBar extends Component {
         super(props)
     }
 
-    componentDidMount() {
-        ValidatorForm.addValidationRule("isNotEmpty", value => value !== '');
-        ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
-            this.props.palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
-        );
+    helpHandlePaletteNameChange = name => {
+        this.props.handlePaletteNameChange(name)
+    }
+
+    helpHandleSavePalette = () => {
+        this.props.handleSavePalette()
     }
 
     render() {
 
-        const { classes, isDrawerOpen, history, handleDrawerOpen, handleInputChange, handleSavePalette, paletteName } = this.props
+        const { classes, palettes, isDrawerOpen,
+            history, handleDrawerOpen,
+            paletteName } = this.props
 
         return (
             <AppBar
@@ -53,28 +56,20 @@ class PaletteFormNavBar extends Component {
                 </Toolbar>
 
                 <div className={classes.appBarButtons}>
-                    <ValidatorForm onSubmit={handleSavePalette}>
-                        <TextValidator
-                            label='Palette Name'
-                            name="paletteName"
-                            value={paletteName}
-                            onChange={handleInputChange}
-                            validators={['required', 'isNotEmpty', 'isPaletteNameUnique']}
-                            errorMessages={['Enter a palette name', 'Enter a palette name', 'Palette name already exisiting']}
-                        />
-                        <Button
-                            type='submit'
-                            variant="contained"
-                            color="primary"
-                        >Save Palette</Button>
 
-                    </ValidatorForm>
+                    <PaletteFormDialog
+                        palettes={palettes}
+                        paletteName={paletteName}
+                        helpHandleSavePalette={this.helpHandleSavePalette}
+                        helpHandlePaletteNameChange={this.helpHandlePaletteNameChange}
+                    />
 
                     <Button
                         variant="contained"
                         color="primary"
                         onClick={history.goBack}
                     >Go Back</Button>
+
                 </div>
 
             </AppBar>
