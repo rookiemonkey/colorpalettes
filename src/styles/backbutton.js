@@ -1,3 +1,5 @@
+import mq from '../helpers/getMediaQuery'
+
 const backButtonStyles = {
     backButtonContainer: {
         width: '20%',
@@ -6,7 +8,23 @@ const backButtonStyles = {
         marginBottom: '-4.5px',
         display: 'inline-block',
         position: 'relative',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        backgroundColor: 'black',
+
+        [mq.down('lg')]: {
+            width: '25%',
+            height: '33.33%'
+        },
+
+        [mq.down('md')]: {
+            width: '50%',
+            height: '20%'
+        },
+
+        [mq.down('xs')]: {
+            width: '100%',
+            height: '10%'
+        },
     },
     backButton: {
         width: '100px',

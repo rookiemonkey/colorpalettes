@@ -92,6 +92,9 @@ const colorBoxStyles = {
             fontSize: '4rem',
             fontWeight: '400',
             textShadow: '1px 2px black',
+            [mq.down('xs')]: {
+                fontSize: '1rem'
+            },
         },
         '& p': {
             fontSize: '2rem',

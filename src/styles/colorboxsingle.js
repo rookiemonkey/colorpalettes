@@ -1,3 +1,5 @@
+import mq from '../helpers/getMediaQuery'
+
 const colorBoxSingleStyles = {
 
     // animations
@@ -33,7 +35,22 @@ const colorBoxSingleStyles = {
         '&:hover button': {
             opacity: '1',
             transition: '500ms',
-        }
+        },
+
+        [mq.down('lg')]: {
+            width: '25%',
+            height: '33.33%'
+        },
+
+        [mq.down('md')]: {
+            width: '50%',
+            height: '20%'
+        },
+
+        [mq.down('xs')]: {
+            width: '100%',
+            height: '10%'
+        },
     },
 
     // overlay - background that grows when copied
@@ -47,7 +64,7 @@ const colorBoxSingleStyles = {
     },
     ColorBoxCopied: {
         position: 'absolute',
-        transform: 'scale(9)',
+        transform: 'scale(50)',
         opacity: '1',
         Index: '10',
         animationName: '$fadeout',

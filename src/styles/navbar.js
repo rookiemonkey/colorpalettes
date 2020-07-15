@@ -10,14 +10,14 @@ const navBarStyles = {
     NavbarLogoContainer: {
         marginRight: '15px',
         padding: '0 13px',
-        fontSize: '22px',
+        fontSize: '15px',
         backgroundColor: '#eceff1',
         height: '100%',
         display: 'flex',
         alignItems: 'center',
 
         '& a': {
-            textDecoration: 'none'
+            textDecoration: 'none',
         }
     },
 
