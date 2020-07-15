@@ -6,13 +6,13 @@ import PaletteSingle from './components/PaletteSingle';
 import PaletteForm from './components/PaletteForm';
 import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
-import { seed } from 'shortid';
 
 class App extends Component {
   constructor(props) {
     super(props)
+    const localPalettes = JSON.parse(window.localStorage.getItem('palettes'))
     this.state = {
-      palettes: seeds
+      palettes: localPalettes || seeds
     }
   }
 
@@ -21,8 +21,9 @@ class App extends Component {
   }
 
   savePalette = newPalette => {
-    seeds.push(newPalette)
-    this.setState({ palettes: [...seeds] })
+    this.setState({ palettes: [...this.state.palettes, newPalette] }, () => {
+      window.localStorage.setItem('palettes', JSON.stringify(this.state.palettes))
+    })
   }
 
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import chroma from 'chroma-js';
+import chroma, { random } from 'chroma-js';
 import classNames from 'classnames';
 import ColorBoxDraggableList from './ColorBoxDraggableList';
 import { withStyles } from '@material-ui/core/styles';
@@ -70,7 +70,10 @@ class PaletteForm extends Component {
     }
 
     handleRandomColor = () => {
-        this.setState({ ...this.state, currentColor: chroma.random() })
+        const randomColor = chroma.random()
+        const [r, g, b, a] = randomColor._rgb
+        const rgbColor = `rgb(${r}, ${g}, ${b})`
+        this.setState({ ...this.state, currentColor: chroma(rgbColor).hex() })
     }
 
     handleAddColorInput = () => {
