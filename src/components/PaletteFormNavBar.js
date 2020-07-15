@@ -51,15 +51,18 @@ class PaletteFormNavBar extends Component {
             >
                 <Toolbar disableGutters={!isDrawerOpen}>
 
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={classNames(classes.menuButton, isDrawerOpen && classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    {
+                        !isDrawerOpen && (<IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            className={classNames(classes.menuButton, isDrawerOpen && classes.hide)}
+                        >
+                            <MenuIcon />
+                        </IconButton>)
+                    }
+
 
                     <Typography variant="h6" noWrap>
                         Create a palette
