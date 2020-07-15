@@ -6,8 +6,9 @@ const miniPaletteStyles = {
         padding: '0.5rem',
         position: 'relative',
         overflow: 'hidden',
-        "&:hover": {
-            cursor: 'pointer'
+        cursor: 'pointer',
+        "&:hover svg": {
+            opacity: '1'
         }
     },
     colors: {
@@ -38,6 +39,22 @@ const miniPaletteStyles = {
         margin: '0 auto',
         position: 'relative',
         marginBottom: '-3.5px'
+    },
+    deleteIconContainer: {
+
+    },
+    deleteIcon: {
+        width: '24px',
+        height: '24px',
+        position: 'absolute',
+        top: '0px',
+        right: '0px',
+        padding: '5px',
+        zIndex: '10',
+        color: 'white',
+        backgroundColor: '#eb3d30',
+        opacity: '0',
+        transition: 'opacity 300ms ease-in-out !important'
     }
 }
 
