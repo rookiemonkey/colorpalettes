@@ -32,7 +32,6 @@ const backButtonStyles = {
         width: '100%'
     },
     colorBoxOverlayMessage: {
-        display: 'flex',
         flexDirection: 'column',
         position: 'fixed',
         display: 'flex',

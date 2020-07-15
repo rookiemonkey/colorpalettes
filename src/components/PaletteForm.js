@@ -72,7 +72,7 @@ class PaletteForm extends Component {
 
     handleRandomColor = () => {
         const randomColor = chroma.random()
-        const [r, g, b, a] = randomColor._rgb
+        const [r, g, b] = randomColor._rgb
         const rgbColor = `rgb(${r}, ${g}, ${b})`
         this.setState({ ...this.state, currentColor: chroma(rgbColor).hex() })
     }
