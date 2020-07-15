@@ -22,30 +22,19 @@ class PaletteFormDialog extends Component {
         );
     }
 
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
-
     paletteNameChange = e => {
         this.props.helpHandlePaletteNameChange(e.target.value)
     }
 
     render() {
 
-        const { helpHandleSavePalette, paletteName } = this.props
+        const { open, handleCloseDialog, helpHandleSavePalette, paletteName } = this.props
 
         return (
             <div>
-                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                    SAVE
-                </Button>
                 <Dialog
-                    open={this.state.open}
-                    onClose={this.handleClose}
+                    open={open}
+                    onClose={handleCloseDialog}
                     aria-labelledby="form-dialog-title"
                 >
 
@@ -81,7 +70,7 @@ class PaletteFormDialog extends Component {
                                 >Save Palette</Button>
 
                                 <Button
-                                    onClick={this.handleClose}
+                                    onClick={handleCloseDialog}
                                     color="primary"
                                 >Cancel</Button>
 

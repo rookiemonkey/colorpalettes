@@ -13,7 +13,18 @@ import formNavBarStyles from '../styles/formnavbar';
 
 class PaletteFormNavBar extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            open: false
+        }
+    }
+
+    handleOpenDialog = () => {
+        this.setState({ open: true })
+    }
+
+    handleCloseDialog = () => {
+        this.setState({ open: false })
     }
 
     helpHandlePaletteNameChange = name => {
@@ -57,20 +68,32 @@ class PaletteFormNavBar extends Component {
 
                 <div className={classes.appBarButtons}>
 
-                    <PaletteFormDialog
-                        palettes={palettes}
-                        paletteName={paletteName}
-                        helpHandleSavePalette={this.helpHandleSavePalette}
-                        helpHandlePaletteNameChange={this.helpHandlePaletteNameChange}
-                    />
-
                     <Button
                         variant="contained"
                         color="primary"
                         onClick={history.goBack}
                     >Go Back</Button>
 
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={this.handleOpenDialog}
+                    >SAVE</Button>
+
                 </div>
+
+                {
+                    this.state.open
+                        ? <PaletteFormDialog
+                            palettes={palettes}
+                            paletteName={paletteName}
+                            open={this.state.open}
+                            handleCloseDialog={this.handleCloseDialog}
+                            helpHandleSavePalette={this.helpHandleSavePalette}
+                            helpHandlePaletteNameChange={this.helpHandlePaletteNameChange}
+                        />
+                        : null
+                }
 
             </AppBar>
         )
