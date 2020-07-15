@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -39,13 +41,15 @@ class PaletteFormDialog extends Component {
 
                 <DialogTitle id="form-dialog-title">
                     Enter a name for your palette
-                    </DialogTitle>
+                </DialogTitle>
+
+                <Picker />
 
                 <DialogContent>
 
                     <DialogContentText>
                         Please give a name for your palette. Make sure taht it is unique.
-                        </DialogContentText>
+                    </DialogContentText>
 
                     <ValidatorForm onSubmit={helpHandleSavePalette}>
 
