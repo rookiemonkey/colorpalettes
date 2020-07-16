@@ -54,7 +54,7 @@ class Home extends Component {
                 <CSSTransition
                     key={shortid.generate()}
                     classNames='fade'
-                    timeout={1000}>
+                    timeout={500}>
 
                     <MiniPalette
                         {...palettes[i]}
