@@ -2,6 +2,15 @@ import mq from '../helpers/getMediaQuery'
 import bg from '../images/Flat-Mountains.svg'
 
 const homeStyles = {
+    "@global": {
+        ".fade-exit": {
+            opacity: '1'
+        },
+        ".fade-exit-active": {
+            opacity: '0',
+            transition: 'opacity 500ms ease-out'
+        }
+    },
     root: {
         // background by: SVGBacgrounds.com
         backgroundImage: `url(${bg})`,
