@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import shortid from 'shortid';
 import { withStyles } from '@material-ui/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -52,13 +51,13 @@ class Home extends Component {
         const minipalettes = palettes.map((p, i) => {
             return (
                 <CSSTransition
-                    key={shortid.generate()}
+                    key={i}
                     classNames='fade'
                     timeout={500}>
 
                     <MiniPalette
                         {...palettes[i]}
-                        key={shortid.generate()}
+                        key={i}
                         deletePalette={this.handleOpenDeleteDialog}
                         handleClick={this.handleClick}
                     />
