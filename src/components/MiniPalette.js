@@ -19,7 +19,6 @@ const MiniPalette = props => {
     return (
         <section
             className={classes.root}
-            onClick={() => { handleClick(id) }}
         >
 
             <DeleteIcon
@@ -27,7 +26,10 @@ const MiniPalette = props => {
                 onClick={() => { deletePalette(id) }}
             />
 
-            <div className={classes.colors}>
+            <div
+                className={classes.colors}
+                onClick={() => { handleClick(id) }}
+            >
                 {miniColorBoxes}
             </div>
 
