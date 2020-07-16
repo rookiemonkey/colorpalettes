@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Home from './components/Home';
+import Page from './components/Page';
 import Palette from './components/Palette';
 import PaletteSingle from './components/PaletteSingle';
 import PaletteForm from './components/PaletteForm';
 import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
-import './styles/app.css';
+import './styles/page.css';
 
 class App extends Component {
   constructor(props) {
@@ -48,26 +49,26 @@ class App extends Component {
                 exact
                 path='/'
                 render={(routerProps) => {
-                  return <div className='page'>
+                  return <Page>
                     <Home
                       palettes={this.state.palettes}
                       deletePalette={this.deletePalette}
                       {...routerProps}
                     />
-                  </div>
+                  </Page>
                 }}
               />
 
               <Route
                 exact path='/palette/new'
                 render={routerProps => {
-                  return <div className='page'>
+                  return <Page>
                     <PaletteForm
                       palettes={this.state.palettes}
                       savePalette={this.savePalette}
                       {...routerProps}
                     />
-                  </div>
+                  </Page>
                 }}
               />
 
@@ -78,11 +79,11 @@ class App extends Component {
                   if (!this.getPalette(id)) { return (<Redirect to="/" />) }
                   const colors = this.getPalette(id)
                   const palette = generatePalette(colors)
-                  return <div className='page'>
+                  return <Page>
                     <Palette
                       palette={palette}
                     />
-                  </div>
+                  </Page>
                 }}
               />
 
@@ -94,13 +95,13 @@ class App extends Component {
                   const colorid = routerProps.match.params.colorid;
                   const colors = this.getPalette(id)
                   const palette = generatePalette(colors)
-                  return <div className='page'>
+                  return <Page>
                     <PaletteSingle
                       palette={palette}
                       colorId={colorid}
                       {...routerProps}
                     />
-                  </div>
+                  </Page>
                 }}
               />
 
