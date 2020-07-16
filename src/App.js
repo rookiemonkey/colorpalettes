@@ -6,6 +6,7 @@ import Page from './components/Page';
 import Palette from './components/Palette';
 import PaletteSingle from './components/PaletteSingle';
 import PaletteForm from './components/PaletteForm';
+import Error404 from './components/404';
 import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
 import './styles/page.css';
@@ -103,6 +104,11 @@ class App extends Component {
                     />
                   </Page>
                 }}
+              />
+
+              <Route
+                exact path='*'
+                component={Error404}
               />
 
             </Switch>
