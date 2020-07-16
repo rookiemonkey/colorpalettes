@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Home from './components/Home';
 import Palette from './components/Palette';
 import PaletteSingle from './components/PaletteSingle';
 import PaletteForm from './components/PaletteForm';
 import seeds from './components/seeds';
 import generatePalette from './helpers/generatePalette';
+import './styles/app.css';
 
 class App extends Component {
   constructor(props) {
@@ -33,62 +35,79 @@ class App extends Component {
   }
 
   render() {
+    // this single route is intended for the page transition
+    // the idea is that this route will always be render hence
+    // connection all other routes for the page transition
     return (
-      <Switch>
+      <Route render={({ location }) => (
+        <TransitionGroup>
+          <CSSTransition key={location.key} classNames='fade' timeout={500}>
+            <Switch location={location}>
 
-        <Route
-          exact
-          path='/'
-          render={(routerProps) => {
-            return <Home
-              palettes={this.state.palettes}
-              deletePalette={this.deletePalette}
-              {...routerProps}
-            />
-          }}
-        />
+              <Route
+                exact
+                path='/'
+                render={(routerProps) => {
+                  return <div className='page'>
+                    <Home
+                      palettes={this.state.palettes}
+                      deletePalette={this.deletePalette}
+                      {...routerProps}
+                    />
+                  </div>
+                }}
+              />
 
-        <Route
-          exact path='/palette/new'
-          render={routerProps => {
-            return <PaletteForm
-              palettes={this.state.palettes}
-              savePalette={this.savePalette}
-              {...routerProps}
-            />
-          }}
-        />
+              <Route
+                exact path='/palette/new'
+                render={routerProps => {
+                  return <div className='page'>
+                    <PaletteForm
+                      palettes={this.state.palettes}
+                      savePalette={this.savePalette}
+                      {...routerProps}
+                    />
+                  </div>
+                }}
+              />
 
-        <Route
-          exact path='/palette/:id'
-          render={routerProps => {
-            const id = routerProps.match.params.id;
-            if (!this.getPalette(id)) { return (<Redirect to="/" />) }
-            const colors = this.getPalette(id)
-            const palette = generatePalette(colors)
-            return <Palette
-              palette={palette}
-            />
-          }}
-        />
+              <Route
+                exact path='/palette/:id'
+                render={routerProps => {
+                  const id = routerProps.match.params.id;
+                  if (!this.getPalette(id)) { return (<Redirect to="/" />) }
+                  const colors = this.getPalette(id)
+                  const palette = generatePalette(colors)
+                  return <div className='page'>
+                    <Palette
+                      palette={palette}
+                    />
+                  </div>
+                }}
+              />
 
-        <Route
-          exact path='/palette/:id/:colorid'
-          render={routerProps => {
-            const id = routerProps.match.params.id;
-            if (!this.getPalette(id)) { return (<Redirect to="/" />) }
-            const colorid = routerProps.match.params.colorid;
-            const colors = this.getPalette(id)
-            const palette = generatePalette(colors)
-            return <PaletteSingle
-              palette={palette}
-              colorId={colorid}
-              {...routerProps}
-            />
-          }}
-        />
+              <Route
+                exact path='/palette/:id/:colorid'
+                render={routerProps => {
+                  const id = routerProps.match.params.id;
+                  if (!this.getPalette(id)) { return (<Redirect to="/" />) }
+                  const colorid = routerProps.match.params.colorid;
+                  const colors = this.getPalette(id)
+                  const palette = generatePalette(colors)
+                  return <div className='page'>
+                    <PaletteSingle
+                      palette={palette}
+                      colorId={colorid}
+                      {...routerProps}
+                    />
+                  </div>
+                }}
+              />
 
-      </Switch>
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
+      )} />
     );
   }
 }
