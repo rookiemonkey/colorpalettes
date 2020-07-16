@@ -13,7 +13,7 @@ class PaletteFormDialog extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            step: 'form-paletteName',
+            step: '',
             currentEmoji: ''
         };
     }
@@ -23,6 +23,7 @@ class PaletteFormDialog extends Component {
         ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
             this.props.palettes.every(({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase())
         );
+        this.setState({ currentEmoji: '', step: 'form-paletteName' })
     }
 
     paletteNameChange = e => {
@@ -40,7 +41,7 @@ class PaletteFormDialog extends Component {
 
     handleSubmit = () => {
         this.props.helpHandleSavePalette(this.state.currentEmoji)
-        this.setState({ step: 'form-paletteName', currentEmoji: '' })
+        this.setState({ step: '', currentEmoji: '' })
     }
 
     render() {
