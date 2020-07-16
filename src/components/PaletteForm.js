@@ -16,7 +16,7 @@ class PaletteForm extends Component {
     }
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             isDrawerOpen: false,
             paletteName: '',
@@ -29,7 +29,7 @@ class PaletteForm extends Component {
     handleSavePalette = emoji => {
         const newColor = {
             paletteName: this.state.paletteName,
-            id: this.state.paletteName.toLowerCase().replaceAll(' ', '-'),
+            id: this.state.paletteName.toLowerCase().replace(/ /g, '-'),
             emoji: emoji,
             colors: this.state.colorBoxes
         }
