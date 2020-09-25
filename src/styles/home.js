@@ -13,7 +13,7 @@ const homeStyles = {
         ".fade-enter": {
             opacity: '0'
         },
-        ".my-node-enter-active": {
+        ".fade-enter-enter-active": {
             opacity: '1',
             transition: 'opacity 500ms ease-out'
         }

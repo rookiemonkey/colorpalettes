@@ -56,6 +56,7 @@ class PaletteFormDialog extends Component {
                     open={this.state.step === 'form-paletteName'}
                     onClose={handleCloseDialog}
                     aria-labelledby="form-dialog-title"
+                    className={classes.dialog_container}
                 >
 
                     <DialogTitle id="form-dialog-title">
