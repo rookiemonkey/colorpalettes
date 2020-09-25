@@ -49,15 +49,16 @@ class Home extends Component {
         const { isDeleteDialogOpen, toBeDeletedPaletteId } = this.state
         const { palettes, classes } = this.props
         const minipalettes = palettes.map((p, i) => {
+            console.log(p)
             return (
                 <CSSTransition
-                    key={i}
+                    key={p.id}
                     classNames='fade'
                     timeout={500}>
 
                     <MiniPalette
                         {...palettes[i]}
-                        key={i}
+                        key={p.id}
                         deletePalette={this.handleOpenDeleteDialog}
                         handleClick={this.handleClick}
                     />

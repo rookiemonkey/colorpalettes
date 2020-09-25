@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/styles';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css'
@@ -8,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import paletteFormDialogStyles from '../styles/paletteformdialog';
 
 class PaletteFormDialog extends Component {
     constructor(props) {
@@ -46,7 +48,7 @@ class PaletteFormDialog extends Component {
 
     render() {
 
-        const { handleCloseDialog, paletteName } = this.props
+        const { handleCloseDialog, paletteName, classes } = this.props
 
         return (
             <>
@@ -111,7 +113,9 @@ class PaletteFormDialog extends Component {
                             Chosen Emoji: {this.state.currentEmoji}
                         </DialogContentText>
 
-                        <Picker onSelect={this.emojiChange} />
+                        <div className={classes.emoji_container}>
+                            <Picker onSelect={this.emojiChange} style={{ width: '100%' }} />
+                        </div>
 
                         <DialogActions>
 
@@ -138,4 +142,4 @@ class PaletteFormDialog extends Component {
     }
 }
 
-export default PaletteFormDialog;
+export default withStyles(paletteFormDialogStyles)(PaletteFormDialog);

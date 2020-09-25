@@ -80,11 +80,9 @@ class App extends Component {
                   if (!this.getPalette(id)) { return (<Redirect to="/" />) }
                   const colors = this.getPalette(id)
                   const palette = generatePalette(colors)
-                  return <Page>
-                    <Palette
-                      palette={palette}
-                    />
-                  </Page>
+                  return <Palette
+                    palette={palette}
+                  />
                 }}
               />
 
@@ -96,19 +94,21 @@ class App extends Component {
                   const colorid = routerProps.match.params.colorid;
                   const colors = this.getPalette(id)
                   const palette = generatePalette(colors)
-                  return <Page>
-                    <PaletteSingle
-                      palette={palette}
-                      colorId={colorid}
-                      {...routerProps}
-                    />
-                  </Page>
+                  return <PaletteSingle
+                    palette={palette}
+                    colorId={colorid}
+                    {...routerProps}
+                  />
                 }}
               />
 
               <Route
                 exact path='*'
-                component={Error404}
+                render={() => (
+                  <Page>
+                    <Error404 />
+                  </Page>
+                )}
               />
 
             </Switch>
